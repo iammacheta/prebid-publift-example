@@ -13,8 +13,8 @@
             [728, 90],
             [970, 250]
         ];
-        var PREBID_TIMEOUT = 1000;
-        var FAILSAFE_TIMEOUT = 3000;
+        var PREBID_TIMEOUT = 10000;
+        var FAILSAFE_TIMEOUT = 30000;
 
         var adUnits = [
             {
@@ -28,6 +28,14 @@
                     bidder: 'appnexus',
                     params: {
                         placementId: 13144370
+                    }
+                },
+                {
+                    bidder: 'pubmatic',
+                    params: {
+                        publisherId: '156209', // required, must be a string, not an integer or other js type.
+                        outstreamAU: 'renderer_test_pubmatic', // required if mediaTypes-> video-> context is 'outstream' and optional if renderer is defined in adUnits or in mediaType video. This value can be get by BlueBillyWig Team.
+                        adSlot: 'pubmatic_test2', // optional, must be a string, not an integer or other js type.
                     }
                 }]
             },
