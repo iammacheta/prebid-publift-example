@@ -50,8 +50,8 @@
             [468, 60],
         ];
 
-        var PREBID_TIMEOUT = 2000; // better to have different on Desk and Mob web. 1800 Desk and 2200 mobile
-        var FAILSAFE_TIMEOUT = 3000; // should be higher than PREBID_TIMEOUT
+        var PREBID_TIMEOUT = 1000;
+        var FAILSAFE_TIMEOUT = 3000;
 
         var adUnits = [
             {
@@ -175,15 +175,6 @@
             ]
         };
 
-        // Google Funding Choices callbackQueue to wait for GFC
-        window.googlefc = window.googlefc || {};
-        window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-        window.googlefc.callbackQueue.push({
-            'CONSENT_API_READY': () => {
-                initPrebidCode()
-            }
-        });
-
         // ======== DO NOT EDIT BELOW THIS LINE =========== //
         var googletag = googletag || {};
         googletag.cmd = googletag.cmd || [];
@@ -191,80 +182,76 @@
             googletag.pubads().disableInitialLoad();
         });
 
-        function initPrebidCode() {
-            var pbjs = pbjs || {};
-            pbjs.que = pbjs.que || [];
+        var pbjs = pbjs || {};
+        pbjs.que = pbjs.que || [];
 
-            pbjs.que.push(function () {
-                pbjs.setConfig({
-                    enableSendAllBids: false,
-                    priceGranularity: customConfigObject,
-                    consentManagement: {
-                        // GPP Consent Management Module
-                        gpp: {
-                            cmpApi: 'iab',
-                            timeout: 8000
-                        },
-                        // TCF Consent Management Module
-                        gdpr: {
-                            cmpApi: 'iab', // and activates the TCF Control Module
-                            timeout: 5000, // for the CMP to load
-                            actionTimeout: 10000, // an additional 10000ms will be waited for a user to provide consent (if none had yet been provided)
-                            defaultGdprScope: false, // If the current page view is known to be in GDPR scope, make sure the adapters are aware of it even on the first page where CMP hasn’t been activated by setting the defaultGdprScope: consentManagement.gdpr.defaultGdprScope: true
-                            allowAuctionWithoutConsent: true,
-                            // TCF Control Module
-                            rules: [{
-                                purpose: "storage",
-                                enforcePurpose: true,
-                                enforceVendor: true
-                            }, {
-                                purpose: "basicAds",
-                                enforcePurpose: true,
-                                enforceVendor: true
-                            }, {
-                                purpose: "personalizedAds",
-                                enforcePurpose: true,
-                                enforceVendor: true
-                            }, {
-                                purpose: "measurement",
-                                enforcePurpose: true,
-                                enforceVendor: true
-                            }, {
-                                purpose: "transmitPreciseGeo",
-                                enforcePurpose: true
-                            }]
-                        }
+        pbjs.que.push(function () {
+            pbjs.setConfig({
+                enableSendAllBids: false,
+                priceGranularity: customConfigObject,
+                consentManagement: {
+                    // GPP Consent Management Module
+                    gpp: {
+                        cmpApi: 'iab',
+                        timeout: 8000,
                     },
-                    // GPT Pre-Auction Module
-                    gptPreAuction: {
-                        enabled: true,
+                    // TCF Consent Management Module
+                    gdpr: {
+                        cmpApi: 'iab',
+                        timeout: 8000,
+                        defaultGdprScope: true,
+                        // TCF Control Module
+                        rules: [{
+                            purpose: "storage",
+                            enforcePurpose: true,
+                            enforceVendor: true
+                        }, {
+                            purpose: "basicAds",
+                            enforcePurpose: true,
+                            enforceVendor: true
+                        }, {
+                            purpose: "personalizedAds",
+                            enforcePurpose: true,
+                            enforceVendor: true
+                        }, {
+                            purpose: "measurement",
+                            enforcePurpose: true,
+                            enforceVendor: true
+                        }, {
+                            purpose: "transmitPreciseGeo",
+                            enforcePurpose: true
+                        }]
+                    }
+                },
+                // GPT Pre-Auction Module
+                gptPreAuction: {
+                    enabled: true,
+                },
+                // Currency Module
+                currency: {
+                    adServerCurrency: 'USD',  // GAM server is USD
+                    granularityMultiplier: 1,  // default bid granularity
+                    defaultRates: {            // Optional: Fallback rates if the currency conversion service is unavailable
+                        'EUR': 1.10,
+                        'GBP': 1.30
                     },
-                    // Currency Module
-                    currency: {
-                        adServerCurrency: 'USD',  // GAM server is USD
-                        granularityMultiplier: 1,  // default bid granularity
-                        defaultRates: {            // Optional: Fallback rates if the currency conversion service is unavailable
-                            'EUR': 1.10,
-                            'GBP': 1.30
-                        },
-                        conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json', // URL to the Prebid conversion rate file
-                    },
-                    userSync: {
-                        filterSettings: {
-                            iframe: {
-                                bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury'],
-                                filter: 'include'
-                            }
+                    conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json', // URL to the Prebid conversion rate file
+                },
+                userSync: {
+                    filterSettings: {
+                        iframe: {
+                            bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury'],
+                            filter: 'include'
                         }
                     }
-                });
-                pbjs.addAdUnits(adUnits);
-                pbjs.requestBids({
-                    bidsBackHandler: initAdserver,
-                    timeout: PREBID_TIMEOUT
-                });
+                }
             });
-        }
+            pbjs.addAdUnits(adUnits);
+            pbjs.requestBids({
+                bidsBackHandler: initAdserver,
+                timeout: PREBID_TIMEOUT
+            });
+        });
 
         function initAdserver() {
             if (pbjs.initAdserverSet) return;
@@ -303,7 +290,6 @@
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
         });
-
     </script>
 </head>
 
