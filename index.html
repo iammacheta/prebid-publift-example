@@ -175,17 +175,26 @@
             ]
         };
 
-        // ======== DO NOT EDIT BELOW THIS LINE =========== //
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        googletag.cmd.push(function () {
-            googletag.pubads().disableInitialLoad();
+        // Google Funding Choices callbackQueue to wait for GFC
+        window.googlefc = window.googlefc || {};
+        window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+        window.googlefc.callbackQueue.push({
+            'CONSENT_API_READY': () => {
+                initAdCode()
+            }
         });
 
-        var pbjs = pbjs || {};
-        pbjs.que = pbjs.que || [];
+        function initAdCode() {
+            // ======== DO NOT EDIT BELOW THIS LINE =========== //
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            googletag.cmd.push(function () {
+                googletag.pubads().disableInitialLoad();
+            });
 
-        function initPrebidAuction() {
+            var pbjs = pbjs || {};
+            pbjs.que = pbjs.que || [];
+
             pbjs.que.push(function () {
                 pbjs.setConfig({
                     enableSendAllBids: false,
@@ -255,24 +264,24 @@
                     timeout: PREBID_TIMEOUT
                 });
             });
-        }
 
-        function initAdserver() {
-            if (pbjs.initAdserverSet) return;
-            pbjs.initAdserverSet = true;
-            googletag.cmd.push(function () {
-                pbjs.que.push(function () {
-                    pbjs.setTargetingForGPTAsync();
-                    googletag.pubads().refresh();
+            function initAdserver() {
+                if (pbjs.initAdserverSet) return;
+                pbjs.initAdserverSet = true;
+                googletag.cmd.push(function () {
+                    pbjs.que.push(function () {
+                        pbjs.setTargetingForGPTAsync();
+                        googletag.pubads().refresh();
+                    });
                 });
-            });
-        }
-        // in case PBJS doesn't load
-        setTimeout(function () {
-            initAdserver();
-        }, FAILSAFE_TIMEOUT);
+            }
+            // in case PBJS doesn't load
+            setTimeout(function () {
+                initAdserver();
+            }, FAILSAFE_TIMEOUT);
 
-        // ====================================== //
+            // ====================================== //
+        }
 
         googletag.cmd.push(function () {
             googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
@@ -295,14 +304,6 @@
             googletag.enableServices();
         });
 
-        // Google Funding Choices callbackQueue to wait for GFC
-        window.googlefc = window.googlefc || {};
-        window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-        window.googlefc.callbackQueue.push({
-            'CONSENT_DATA_READY': () => {
-                initPrebidAuction()
-            }
-        });
     </script>
 </head>
 
