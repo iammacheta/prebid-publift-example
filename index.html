@@ -51,7 +51,7 @@
         ];
 
         var PREBID_TIMEOUT = 2000; // better to have different on Desk and Mob web. 1800 Desk and 2200 mobile
-        var FAILSAFE_TIMEOUT = PREBID_TIMEOUT + 1000;
+        var FAILSAFE_TIMEOUT = 3000; // should be higher than PREBID_TIMEOUT
 
         var adUnits = [
             {
@@ -255,7 +255,6 @@
                     timeout: PREBID_TIMEOUT
                 });
             });
-
         }
 
         function initAdserver() {
@@ -299,11 +298,9 @@
         // Google Funding Choices callbackQueue to wait for GFC
         window.googlefc = window.googlefc || {};
         window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-        window.googlefc.callbackQueue.push(function (consents) {
-            if (consents && consents.purposesAllowed.includes('storage')) {
-                initPrebidAuction();  // Initiate Prebid.js auction once consent is provided
-            } else {
-                console.log("Consent not granted. Skipping Prebid auction.");
+        window.googlefc.callbackQueue.push({
+            'CONSENT_DATA_READY': () => {
+                initPrebidAuction()
             }
         });
     </script>
