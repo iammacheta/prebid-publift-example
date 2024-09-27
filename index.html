@@ -180,18 +180,18 @@
         window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
         window.googlefc.callbackQueue.push({
             'CONSENT_API_READY': () => {
-                initAdCode()
+                initPrebidCode()
             }
         });
 
-        function initAdCode() {
-            // ======== DO NOT EDIT BELOW THIS LINE =========== //
-            var googletag = googletag || {};
-            googletag.cmd = googletag.cmd || [];
-            googletag.cmd.push(function () {
-                googletag.pubads().disableInitialLoad();
-            });
+        // ======== DO NOT EDIT BELOW THIS LINE =========== //
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        googletag.cmd.push(function () {
+            googletag.pubads().disableInitialLoad();
+        });
 
+        function initPrebidCode() {
             var pbjs = pbjs || {};
             pbjs.que = pbjs.que || [];
 
@@ -264,24 +264,24 @@
                     timeout: PREBID_TIMEOUT
                 });
             });
-
-            function initAdserver() {
-                if (pbjs.initAdserverSet) return;
-                pbjs.initAdserverSet = true;
-                googletag.cmd.push(function () {
-                    pbjs.que.push(function () {
-                        pbjs.setTargetingForGPTAsync();
-                        googletag.pubads().refresh();
-                    });
-                });
-            }
-            // in case PBJS doesn't load
-            setTimeout(function () {
-                initAdserver();
-            }, FAILSAFE_TIMEOUT);
-
-            // ====================================== //
         }
+
+        function initAdserver() {
+            if (pbjs.initAdserverSet) return;
+            pbjs.initAdserverSet = true;
+            googletag.cmd.push(function () {
+                pbjs.que.push(function () {
+                    pbjs.setTargetingForGPTAsync();
+                    googletag.pubads().refresh();
+                });
+            });
+        }
+        // in case PBJS doesn't load
+        setTimeout(function () {
+            initAdserver();
+        }, FAILSAFE_TIMEOUT);
+
+        // ====================================== //
 
         googletag.cmd.push(function () {
             googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
