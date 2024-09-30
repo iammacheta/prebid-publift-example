@@ -179,7 +179,6 @@
         var googletag = googletag || {};
         googletag.cmd = googletag.cmd || [];
         googletag.cmd.push(function () {
-            googletag.pubads().collapseEmptyDivs();
             googletag.pubads().disableInitialLoad();
         });
 
@@ -276,6 +275,7 @@
     <div id='div_display_m' style='width: 336px; height: 280px;'>
         <script type='text/javascript'>
             googletag.cmd.push(function () {
+                googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_m');
             });
         </script>
@@ -287,6 +287,7 @@
     <div id='div_display_l' style='width: 300px; height: 600px;'>
         <script type='text/javascript'>
             googletag.cmd.push(function () {
+                googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_l');
             });
         </script>
@@ -296,6 +297,7 @@
     <div id='div_display_footer_d' style='width: 728px; height: 90px;'>
         <script type='text/javascript'>
             googletag.cmd.push(function () {
+                googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_footer_d');
             });
         </script>
@@ -305,6 +307,7 @@
     <div id='div_display_footer_m' style='width: 320px; height: 100px;'>
         <script type='text/javascript'>
             googletag.cmd.push(function () {
+                googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_footer_m');
             });
         </script>
