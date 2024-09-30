@@ -190,30 +190,23 @@
                 enableSendAllBids: false,
                 priceGranularity: customConfigObject,
                 consentManagement: {
-                    // TCF Consent Management Module
                     gdpr: {
                         cmpApi: 'iab',
                         timeout: 8000,
                         defaultGdprScope: true,
-                    },
-                    usp: {
-                        cmpApi: 'iab',
-                        timeout: 100
                     }
                 },
-                // GPT Pre-Auction Module
                 gptPreAuction: {
                     enabled: true,
                 },
-                // Currency Module
                 currency: {
-                    adServerCurrency: 'USD',  // GAM server is USD
-                    granularityMultiplier: 1,  // default bid granularity
-                    defaultRates: {            // Optional: Fallback rates if the currency conversion service is unavailable
+                    adServerCurrency: 'USD',
+                    granularityMultiplier: 1,
+                    defaultRates: {
                         'EUR': 1.10,
                         'GBP': 1.30
                     },
-                    conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json', // URL to the Prebid conversion rate file
+                    conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
                 },
                 userSync: {
                     filterSettings: {
@@ -241,7 +234,6 @@
                 });
             });
         }
-        // in case PBJS doesn't load
         setTimeout(function () {
             initAdserver();
         }, FAILSAFE_TIMEOUT);
