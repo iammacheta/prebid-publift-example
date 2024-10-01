@@ -175,64 +175,61 @@
             ]
         };
 
-        function applyGdprConfigBasedOnGeo() {
-            fetch('https://get.geojs.io/v1/ip/country.json')
-                .then(response => response.json())
-                .then(data => {
-                    var isEU = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK'].includes(data.country); // Check if country is in EU
+        // ======== DO NOT EDIT BELOW THIS LINE =========== //
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        googletag.cmd.push(function () {
+            googletag.pubads().disableInitialLoad();
+        });
 
-                    // Set Prebid config with defaultGdprScope based on GEO location
-                    var pbjs = pbjs || {};
-                    pbjs.que = pbjs.que || [];
+        var pbjs = pbjs || {};
+        pbjs.que = pbjs.que || [];
 
-                    pbjs.que.push(function () {
-                        pbjs.setConfig({
-                            enableSendAllBids: false,
-                            enableTIDs: true,
-                            useBidCache: true,
-                            priceGranularity: customConfigObject,
-                            consentManagement: {
-                                gdpr: {
-                                    cmpApi: 'iab',
-                                    timeout: 500,
-                                    actionTimeout: 10000,
-                                    defaultGdprScope: isEU,  // Set based on GEO location
-                                    allowAuctionWithoutConsent: true,
-                                },
-                                usp: {
-                                    cmpApi: 'iab',
-                                    timeout: 100,
-                                }
-                            },
-                            gptPreAuction: {
-                                enabled: true,
-                            },
-                            currency: {
-                                adServerCurrency: 'USD',
-                                granularityMultiplier: 1,
-                                defaultRates: {
-                                    'EUR': 1.10,
-                                    'GBP': 1.30
-                                },
-                                conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
-                            },
-                            userSync: {
-                                filterSettings: {
-                                    iframe: {
-                                        bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury'],
-                                        filter: 'include'
-                                    }
-                                }
-                            }
-                        });
-                        pbjs.addAdUnits(adUnits);
-                        pbjs.requestBids({
-                            bidsBackHandler: initAdserver,
-                            timeout: PREBID_TIMEOUT
-                        });
-                    });
-                });
-        }
+        pbjs.que.push(function () {
+            pbjs.setConfig({
+                enableSendAllBids: false,
+                enableTIDs: true,
+                priceGranularity: customConfigObject,
+                consentManagement: {
+                    gdpr: {
+                        cmpApi: 'iab',
+                        timeout: 500,
+                        actionTimeout: 10000,
+                        defaultGdprScope: false,
+                        allowAuctionWithoutConsent: true,
+                    },
+                    usp: {
+                        cmpApi: 'iab',
+                        timeout: 500,
+                    }
+                },
+                gptPreAuction: {
+                    enabled: true,
+                },
+                currency: {
+                    adServerCurrency: 'USD',
+                    granularityMultiplier: 1,
+                    defaultRates: {
+                        'EUR': 1.10,
+                        'GBP': 1.30
+                    },
+                    conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
+                },
+                userSync: {
+                    filterSettings: {
+                        iframe: {
+                            bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury'],
+                            filter: 'include'
+                        }
+                    }
+                }
+            });
+            pbjs.addAdUnits(adUnits);
+            pbjs.requestBids({
+                bidsBackHandler: initAdserver,
+                timeout: PREBID_TIMEOUT
+            });
+        });
 
         function initAdserver() {
             if (pbjs.initAdserverSet) return;
@@ -244,10 +241,6 @@
                 });
             });
         }
-
-        // Fetch GEO and apply GDPR config
-        applyGdprConfigBasedOnGeo();
-
         setTimeout(function () {
             initAdserver();
         }, FAILSAFE_TIMEOUT);
