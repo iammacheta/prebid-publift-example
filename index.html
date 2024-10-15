@@ -50,7 +50,7 @@
             [468, 60],
         ];
 
-        var PREBID_TIMEOUT = 1000;
+        var PREBID_TIMEOUT = 2000;
         var FAILSAFE_TIMEOUT = 3000;
 
         var adUnits = [
@@ -186,17 +186,49 @@
         pbjs.que = pbjs.que || [];
 
         pbjs.que.push(function () {
+            pbjs.bidderSettings = {
+                standard: {
+                    storageAllowed: false
+                },
+                appnexus: {
+                    storageAllowed: true
+                },
+                pubmatic: {
+                    storageAllowed: true
+                },
+                openx: {
+                    storageAllowed: true
+                },
+                ix: {
+                    storageAllowed: true
+                },
+                rubicon: {
+                    storageAllowed: true
+                },
+                sovrn: {
+                    storageAllowed: true
+                },
+                smartadserver: {
+                    storageAllowed: true
+                },
+                criteo: {
+                    storageAllowed: true
+                },
+                ogury: {
+                    storageAllowed: true
+                },
+            }
+
             pbjs.setConfig({
                 enableSendAllBids: false,
                 enableTIDs: true,
                 priceGranularity: customConfigObject,
-                consentManagement: {
+                consentManagement: { // TODO. Detect if user is not in EEU or US. "You should align your Prebid config to that and consider removing the consentManagement config from the Prebid.js entirely when GDPR does not apply."
                     gdpr: {
                         cmpApi: 'iab',
                         timeout: 500,
                         actionTimeout: 10000,
                         defaultGdprScope: false,
-                        allowAuctionWithoutConsent: true,
                     },
                     usp: {
                         cmpApi: 'iab',
