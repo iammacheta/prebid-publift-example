@@ -175,18 +175,6 @@
             ]
         };
 
-        // ======== CMP Error Handling =========== //
-        (function () {
-            const originalConsoleError = console.error;
-            console.error = function (...args) {
-                if (args[0] && typeof args[0] === 'string' && args[0].includes('CMP not found')) {
-                    // Log the event when CMP is not found
-                    console.log('Sending CMP error to mixpanel');
-                }
-                originalConsoleError.apply(console, args); // Keep original logging behavior
-            };
-        })();
-
         // ======== DO NOT EDIT BELOW THIS LINE =========== //
         var googletag = googletag || {};
         googletag.cmd = googletag.cmd || [];
