@@ -4,7 +4,7 @@
 
 <head>
     <link rel="icon" type="image/png" href="/favicon.png">
-    <!-- <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script> -->
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script async src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@latest/prebid.js"></script>
 
     <script>
@@ -175,15 +175,17 @@
             ]
         };
 
-        // ======== Consent Management Error Handling =========== //
-        pbjs.que.push(function () {
-            pbjs.onEvent('consentManagement', function (event) {
-                // Check if the CMP is missing or any issue related to CMP
-                if (event && event.msg && event.msg.includes('CMP not found')) {
+        // ======== CMP Error Handling =========== //
+        (function () {
+            const originalConsoleError = console.error;
+            console.error = function (...args) {
+                if (args[0] && typeof args[0] === 'string' && args[0].includes('CMP not found')) {
+                    // Log the event when CMP is not found
                     console.log('Sending CMP error to mixpanel');
                 }
-            });
-        });
+                originalConsoleError.apply(console, args); // Keep original logging behavior
+            };
+        })();
 
         // ======== DO NOT EDIT BELOW THIS LINE =========== //
         var googletag = googletag || {};
