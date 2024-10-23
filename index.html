@@ -402,7 +402,23 @@
                             allowSmallerSizes: true,
                             position: 'above'
                         }
-                    }]
+                    },
+                    {
+                        bidder: "adagio",
+                        params: {
+                            organizationId: "1458",
+                            site: "mobalytics-gg",
+                        }
+                    }],
+                // Params shared between all bidders
+                ortb2Imp: {
+                    ext: {
+                        data: {
+                            divId: "web-destiny-2-display-m",
+                            placement: "sidebar-1",
+                        }
+                    }
+                }
             },
             {
                 code: '/21974715207/web-destiny-2-display-l',
@@ -424,7 +440,23 @@
                             placementId: 34122285,
                             allowSmallerSizes: true,
                         }
-                    }]
+                    },
+                    {
+                        bidder: "adagio",
+                        params: {
+                            organizationId: "1458",
+                            site: "mobalytics-gg",
+                        }
+                    }],
+                // Params shared between all bidders
+                ortb2Imp: {
+                    ext: {
+                        data: {
+                            divId: "web-destiny-2-display-l",
+                            placement: "sidebar-2",
+                        }
+                    }
+                }
             },
             {
                 code: '/21974715207/web-destiny-2-display-footer-d',
@@ -445,10 +477,25 @@
                         bidder: 'appnexus',
                         params: {
                             placementId: 34122289,
-                            allowSmallerSizes: true,
                             position: 'above'
                         }
-                    }]
+                    },
+                    {
+                        bidder: "adagio",
+                        params: {
+                            organizationId: "1458",
+                            site: "mobalytics-gg",
+                        }
+                    }],
+                // Params shared between all bidders
+                ortb2Imp: {
+                    ext: {
+                        data: {
+                            divId: "web-destiny-2-display-footer-d",
+                            placement: "footer-w",
+                        }
+                    }
+                }
             },
             {
                 code: '/21974715207/web-destiny-2-display-footer-m',
@@ -472,7 +519,23 @@
                             allowSmallerSizes: true,
                             position: 'above'
                         }
-                    }]
+                    },
+                    {
+                        bidder: "adagio",
+                        params: {
+                            organizationId: "1458",
+                            site: "mobalytics-gg",
+                        }
+                    }],
+                // Params shared between all bidders
+                ortb2Imp: {
+                    ext: {
+                        data: {
+                            divId: "web-destiny-2-display-footer-m",
+                            placement: "footer-s",
+                        }
+                    }
+                }
             },
         ];
 
@@ -556,6 +619,9 @@
                 ogury: {
                     storageAllowed: true
                 },
+                adagio: {
+                    storageAllowed: true
+                }
             }
 
             pbjs.setConfig({
@@ -563,11 +629,12 @@
                 enableTIDs: true,
                 priceGranularity: customConfigObject,
                 consentManagement: { // TODO. Detect if user is not in EEU or US. "You should align your Prebid config to that and consider removing the consentManagement config from the Prebid.js entirely when GDPR does not apply."
-                    gdpr: {
-                        cmpApi: 'iab',
-                        timeout: 500,
-                        actionTimeout: 10000,
-                        defaultGdprScope: false,
+                    "gdpr": {
+                        "cmpApi": "iab",
+                        "timeout": 500,
+                        "actionTimeout": 10000,
+                        "defaultGdprScope": true,
+                        "allowAuctionWithoutConsent": true
                     },
                     // gpp: {
                     //     cmpApi: 'iab',
@@ -590,13 +657,35 @@
                     },
                     conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
                 },
+                deviceAccess: true,
                 userSync: {
                     filterSettings: {
                         iframe: {
-                            bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury'],
+                            bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury', 'adagio'],
                             filter: 'include'
                         }
                     }
+                },
+                ortb2: {
+                    site: {
+                        ext: {
+                            data: {
+                                pagetype: "article",                // Recommended
+                                category: "economy",                // Optional    
+                            }
+                        }
+                    }
+                },
+                realTimeData: {
+                    dataProviders: [
+                        {
+                            name: "adagio",
+                            params: {
+                                organizationId: "1458",
+                                site: "mobalytics-gg",
+                            },
+                        },
+                    ],
                 }
             });
             pbjs.addAdUnits(adUnits);
