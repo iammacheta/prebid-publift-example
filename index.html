@@ -330,7 +330,8 @@
     <!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
 
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-    <script async src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-conf2@latest/prebid.js"></script>
+    <script async
+        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@4883a1d06d929841c087d5c6dfed1ce08e1dce78/prebid.js"></script>
     <!-- <script async src="https://storage.cloud.google.com/cdn.mobalytics.gg/assets/common/prebid/prebid.js"></script> -->
 
     <script>
@@ -628,7 +629,7 @@
                 enableSendAllBids: false,
                 enableTIDs: true,
                 priceGranularity: customConfigObject,
-                consentManagement: { // TODO. Detect if user is not in EEU or US. "You should align your Prebid config to that and consider removing the consentManagement config from the Prebid.js entirely when GDPR does not apply."
+                consentManagement: {
                     "gdpr": {
                         "cmpApi": "iab",
                         "timeout": 500,
@@ -636,10 +637,6 @@
                         "defaultGdprScope": true,
                         "allowAuctionWithoutConsent": true
                     },
-                    // gpp: {
-                    //     cmpApi: 'iab',
-                    //     timeout: 8000
-                    // },
                     usp: {
                         cmpApi: 'iab',
                         timeout: 500,
@@ -665,27 +662,6 @@
                             filter: 'include'
                         }
                     }
-                },
-                ortb2: {
-                    site: {
-                        ext: {
-                            data: {
-                                pagetype: "article",                // Recommended
-                                category: "economy",                // Optional    
-                            }
-                        }
-                    }
-                },
-                realTimeData: {
-                    dataProviders: [
-                        {
-                            name: "adagio",
-                            params: {
-                                organizationId: "1458",
-                                site: "mobalytics-gg",
-                            },
-                        },
-                    ],
                 }
             });
             pbjs.addAdUnits(adUnits);
