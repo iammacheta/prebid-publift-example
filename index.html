@@ -428,34 +428,29 @@
         // ====================================== //
 
         googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
+            const adSlots = [
+                { path: '/21974715207/web-destiny-2-display-m', sizes: div_display_m_sizes, id: 'div_display_m' },
+                { path: '/21974715207/web-destiny-2-display-l', sizes: div_display_l_sizes, id: 'div_display_l' },
+                { path: '/21974715207/web-destiny-2-display-footer-d', sizes: div_display_footer_d_sizes, id: 'div_display_footer_d' },
+                { path: '/21974715207/web-destiny-2-display-footer-m', sizes: div_display_footer_m_sizes, id: 'div_display_footer_m' }
+            ];
+
+            adSlots.forEach(slot => {
+                googletag.defineSlot(slot.path, slot.sizes, slot.id).addService(googletag.pubads());
+            });
+
             googletag.pubads().enableSingleRequest();
 
             googletag.pubads().addEventListener('impressionViewable', function (event) {
                 var slot = event.slot;
-                console.log("Impression for slot", slot.getSlotElementId(), "became viewable.");
                 setTimeout(function () {
                     refreshBid()
                 }, REFRESH_INTERVAL);
             });
+            
+            googletag.enableServices();
+        });
 
-            googletag.enableServices();
-        });
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-l', div_display_l_sizes, 'div_display_l').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-d', div_display_footer_d_sizes, 'div_display_footer_d').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-m', div_display_footer_m_sizes, 'div_display_footer_m').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
     </script>
 </head>
 
