@@ -443,11 +443,13 @@
 
             googletag.pubads().addEventListener('impressionViewable', function (event) {
                 var slot = event.slot;
-                setTimeout(function () {
-                    refreshBid()
-                }, REFRESH_INTERVAL);
+                if (slot.getSlotElementId() === "div_display_m") {
+                    setTimeout(function () {
+                        refreshBid()
+                    }, REFRESH_INTERVAL);
+                }
             });
-            
+
             googletag.enableServices();
         });
 
