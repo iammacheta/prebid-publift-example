@@ -421,13 +421,6 @@
             });
         }
 
-        googletag.pubads().addEventListener('impressionViewable', function (event) {
-            var slot = event.slot;
-            setTimeout(function () {
-                refreshBid()
-            }, REFRESH_INTERVAL);
-        });
-
         setTimeout(function () {
             initAdserver();
         }, FAILSAFE_TIMEOUT);
@@ -453,6 +446,13 @@
             googletag.defineSlot('/21974715207/web-destiny-2-display-footer-m', div_display_footer_m_sizes, 'div_display_footer_m').addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
+        });
+
+        googletag.pubads().addEventListener('impressionViewable', function (event) {
+            var slot = event.slot;
+            setTimeout(function () {
+                refreshBid()
+            }, REFRESH_INTERVAL);
         });
     </script>
 </head>
