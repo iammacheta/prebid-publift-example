@@ -55,6 +55,7 @@
 
         var PREBID_TIMEOUT = 2000;
         var FAILSAFE_TIMEOUT = 3000;
+        var REFRESH_INTERVAL = 30000;
 
         var adUnits = [
             {
@@ -406,6 +407,27 @@
                 });
             });
         }
+
+        function refreshBid() {
+            pbjs.que.push(function () {
+                pbjs.requestBids({
+                    timeout: PREBID_TIMEOUT,
+                    adUnitCodes: ['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m'],
+                    bidsBackHandler: function () {
+                        pbjs.setTargetingForGPTAsync(['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m']);
+                        googletag.pubads().refresh();
+                    }
+                });
+            });
+        }
+
+        googletag.pubads().addEventListener('impressionViewable', function (event) {
+            var slot = event.slot;
+            setTimeout(function () {
+                refreshBid()
+            }, REFRESH_INTERVAL);
+        });
+
         setTimeout(function () {
             initAdserver();
         }, FAILSAFE_TIMEOUT);
