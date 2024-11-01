@@ -302,14 +302,16 @@
             }
         }
 
-        // ======== DO NOT EDIT BELOW THIS LINE =========== //
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        googletag.cmd.push(function () {
-            googletag.pubads().disableInitialLoad();
-        });
+
 
         checkGooglefcReady(() => {
+
+            // ======== DO NOT EDIT BELOW THIS LINE =========== //
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            googletag.cmd.push(function () {
+                googletag.pubads().disableInitialLoad();
+            });
 
             var pbjs = pbjs || {};
             pbjs.que = pbjs.que || [];
@@ -433,36 +435,35 @@
                 initAdserver();
             }, FAILSAFE_TIMEOUT);
 
-        });
+            // ====================================== //
 
-        // ====================================== //
+            googletag.cmd.push(function () {
+                const adSlots = [
+                    { path: '/21974715207/web-destiny-2-display-m', sizes: div_display_m_sizes, id: 'div_display_m' },
+                    { path: '/21974715207/web-destiny-2-display-l', sizes: div_display_l_sizes, id: 'div_display_l' },
+                    { path: '/21974715207/web-destiny-2-display-footer-d', sizes: div_display_footer_d_sizes, id: 'div_display_footer_d' },
+                    { path: '/21974715207/web-destiny-2-display-footer-m', sizes: div_display_footer_m_sizes, id: 'div_display_footer_m' }
+                ];
 
-        googletag.cmd.push(function () {
-            const adSlots = [
-                { path: '/21974715207/web-destiny-2-display-m', sizes: div_display_m_sizes, id: 'div_display_m' },
-                { path: '/21974715207/web-destiny-2-display-l', sizes: div_display_l_sizes, id: 'div_display_l' },
-                { path: '/21974715207/web-destiny-2-display-footer-d', sizes: div_display_footer_d_sizes, id: 'div_display_footer_d' },
-                { path: '/21974715207/web-destiny-2-display-footer-m', sizes: div_display_footer_m_sizes, id: 'div_display_footer_m' }
-            ];
+                adSlots.forEach(slot => {
+                    googletag.defineSlot(slot.path, slot.sizes, slot.id).addService(googletag.pubads());
+                });
 
-            adSlots.forEach(slot => {
-                googletag.defineSlot(slot.path, slot.sizes, slot.id).addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+
+                googletag.pubads().addEventListener('impressionViewable', function (event) {
+                    var slot = event.slot;
+                    if (slot.getSlotElementId() === "div_display_m") {
+                        setTimeout(function () {
+                            refreshBid()
+                        }, REFRESH_INTERVAL);
+                    }
+                });
+
+                googletag.enableServices();
             });
 
-            googletag.pubads().enableSingleRequest();
-
-            googletag.pubads().addEventListener('impressionViewable', function (event) {
-                var slot = event.slot;
-                if (slot.getSlotElementId() === "div_display_m") {
-                    setTimeout(function () {
-                        refreshBid()
-                    }, REFRESH_INTERVAL);
-                }
-            });
-
-            googletag.enableServices();
         });
-
     </script>
 </head>
 
