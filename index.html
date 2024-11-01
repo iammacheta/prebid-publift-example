@@ -10,293 +10,6 @@
     <!-- <script async src="https://storage.cloud.google.com/cdn.mobalytics.gg/assets/common/prebid/prebid.js"></script> -->
 
     <script>
-        var div_display_m_sizes = [
-            [300, 250],
-            [336, 280],
-            [338, 280],
-            [300, 50],
-            [320, 100],
-            [300, 100],
-            [250, 250],
-            [200, 200],
-        ];
-        var div_display_l_sizes = [
-            [300, 250],
-            [336, 280],
-            [338, 280],
-            [120, 240],
-            [320, 50],
-            [320, 100],
-            [300, 50],
-            [300, 100],
-            [250, 360],
-            [250, 250],
-            [200, 200],
-            [320, 480],
-            [240, 400],
-            [160, 600],
-            [300, 600],
-            [120, 600],
-        ];
-        var div_display_footer_d_sizes = [
-            [728, 90],
-            [970, 90],
-            [750, 100],
-            [980, 120],
-        ];
-        var div_display_footer_m_sizes = [
-            [320, 50],
-            [320, 100],
-            [300, 50],
-            [300, 100],
-            [468, 60],
-        ];
-
-        var PREBID_TIMEOUT = 2000;
-        var FAILSAFE_TIMEOUT = 3000;
-        var REFRESH_INTERVAL = 30000;
-
-        var adUnits = [
-            {
-                code: '/21974715207/web-destiny-2-display-m',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_m_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: 'pubmatic',
-                        params: {
-                            publisherId: '165261',
-                            adSlot: '6141440'
-                        }
-                    },
-                    {
-                        bidder: 'appnexus',
-                        params: {
-                            placementId: 34122281,
-                            allowSmallerSizes: true,
-                            position: 'above'
-                        }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256209'
-                        }
-                    }],
-                // Params shared between all bidders
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-m",
-                            placement: "sidebar-1",
-                        }
-                    }
-                }
-            },
-            {
-                code: '/21974715207/web-destiny-2-display-l',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_l_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: 'pubmatic',
-                        params: {
-                            publisherId: '165261',
-                            adSlot: '6141441'
-                        }
-                    },
-                    {
-                        bidder: 'appnexus',
-                        params: {
-                            placementId: 34122285,
-                            allowSmallerSizes: true,
-                        }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256210'
-                        }
-                    }],
-                // Params shared between all bidders
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-l",
-                            placement: "sidebar-2",
-                        }
-                    }
-                }
-            },
-            {
-                code: '/21974715207/web-destiny-2-display-footer-d',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_footer_d_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: 'pubmatic',
-                        params: {
-                            publisherId: '165261',
-                            adSlot: '6141442'
-                        }
-                    },
-                    {
-                        bidder: 'appnexus',
-                        params: {
-                            placementId: 34122289,
-                            position: 'above'
-                        }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256211'
-                        }
-                    }],
-                // Params shared between all bidders
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-footer-d",
-                            placement: "footer-w",
-                        }
-                    }
-                }
-            },
-            {
-                code: '/21974715207/web-destiny-2-display-footer-m',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_footer_m_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: 'pubmatic',
-                        params: {
-                            publisherId: '165261',
-                            adSlot: '6141443'
-                        }
-                    },
-                    {
-                        bidder: 'appnexus',
-                        params: {
-                            placementId: 34122291,
-                            allowSmallerSizes: true,
-                            position: 'above'
-                        }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256212'
-                        }
-                    }],
-                // Params shared between all bidders
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-footer-m",
-                            placement: "footer-s",
-                        }
-                    }
-                }
-            },
-        ];
-
-        const customConfigObject = {
-            "buckets": [
-                {
-                    "max": 3,
-                    "increment": 0.01
-                },
-                {
-                    "max": 5,
-                    "increment": 0.05
-                },
-                {
-                    "max": 9,
-                    "increment": 0.1
-                },
-                {
-                    "max": 40,
-                    "increment": 0.5
-                },
-                {
-                    "max": 100,
-                    "increment": 10.00
-                }
-            ]
-        };
-
-        // ======== DO NOT EDIT BELOW THIS LINE =========== //
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        googletag.cmd.push(function () {
-            googletag.pubads().disableInitialLoad();
-        });
-
         function checkGooglefcReady(callback) {
             let attempts = 0;
             const maxAttempts = 20; // Limit to prevent infinite looping
@@ -316,6 +29,294 @@
         }
 
         checkGooglefcReady(() => {
+
+            var div_display_m_sizes = [
+                [300, 250],
+                [336, 280],
+                [338, 280],
+                [300, 50],
+                [320, 100],
+                [300, 100],
+                [250, 250],
+                [200, 200],
+            ];
+            var div_display_l_sizes = [
+                [300, 250],
+                [336, 280],
+                [338, 280],
+                [120, 240],
+                [320, 50],
+                [320, 100],
+                [300, 50],
+                [300, 100],
+                [250, 360],
+                [250, 250],
+                [200, 200],
+                [320, 480],
+                [240, 400],
+                [160, 600],
+                [300, 600],
+                [120, 600],
+            ];
+            var div_display_footer_d_sizes = [
+                [728, 90],
+                [970, 90],
+                [750, 100],
+                [980, 120],
+            ];
+            var div_display_footer_m_sizes = [
+                [320, 50],
+                [320, 100],
+                [300, 50],
+                [300, 100],
+                [468, 60],
+            ];
+
+            var PREBID_TIMEOUT = 2000;
+            var FAILSAFE_TIMEOUT = 3000;
+            var REFRESH_INTERVAL = 30000;
+
+            var adUnits = [
+                {
+                    code: '/21974715207/web-destiny-2-display-m',
+                    mediaTypes: {
+                        banner: {
+                            sizes: div_display_m_sizes
+                        }
+                    },
+                    bids: [
+                        {
+                            bidder: 'pubmatic',
+                            params: {
+                                publisherId: '165261',
+                                adSlot: '6141440'
+                            }
+                        },
+                        {
+                            bidder: 'appnexus',
+                            params: {
+                                placementId: 34122281,
+                                allowSmallerSizes: true,
+                                position: 'above'
+                            }
+                        },
+                        {
+                            bidder: "adagio",
+                            params: {
+                                organizationId: "1458",
+                                site: "mobalytics-gg",
+                            }
+                        },
+                        {
+                            bidder: 'oms',
+                            params: {
+                                publisherId: '21048',
+                            }
+                        },
+                        {
+                            bidder: 'sovrn',
+                            params: {
+                                tagid: '1256209'
+                            }
+                        }],
+                    // Params shared between all bidders
+                    ortb2Imp: {
+                        ext: {
+                            data: {
+                                divId: "web-destiny-2-display-m",
+                                placement: "sidebar-1",
+                            }
+                        }
+                    }
+                },
+                {
+                    code: '/21974715207/web-destiny-2-display-l',
+                    mediaTypes: {
+                        banner: {
+                            sizes: div_display_l_sizes
+                        }
+                    },
+                    bids: [
+                        {
+                            bidder: 'pubmatic',
+                            params: {
+                                publisherId: '165261',
+                                adSlot: '6141441'
+                            }
+                        },
+                        {
+                            bidder: 'appnexus',
+                            params: {
+                                placementId: 34122285,
+                                allowSmallerSizes: true,
+                            }
+                        },
+                        {
+                            bidder: "adagio",
+                            params: {
+                                organizationId: "1458",
+                                site: "mobalytics-gg",
+                            }
+                        },
+                        {
+                            bidder: 'oms',
+                            params: {
+                                publisherId: '21048',
+                            }
+                        },
+                        {
+                            bidder: 'sovrn',
+                            params: {
+                                tagid: '1256210'
+                            }
+                        }],
+                    // Params shared between all bidders
+                    ortb2Imp: {
+                        ext: {
+                            data: {
+                                divId: "web-destiny-2-display-l",
+                                placement: "sidebar-2",
+                            }
+                        }
+                    }
+                },
+                {
+                    code: '/21974715207/web-destiny-2-display-footer-d',
+                    mediaTypes: {
+                        banner: {
+                            sizes: div_display_footer_d_sizes
+                        }
+                    },
+                    bids: [
+                        {
+                            bidder: 'pubmatic',
+                            params: {
+                                publisherId: '165261',
+                                adSlot: '6141442'
+                            }
+                        },
+                        {
+                            bidder: 'appnexus',
+                            params: {
+                                placementId: 34122289,
+                                position: 'above'
+                            }
+                        },
+                        {
+                            bidder: "adagio",
+                            params: {
+                                organizationId: "1458",
+                                site: "mobalytics-gg",
+                            }
+                        },
+                        {
+                            bidder: 'oms',
+                            params: {
+                                publisherId: '21048',
+                            }
+                        },
+                        {
+                            bidder: 'sovrn',
+                            params: {
+                                tagid: '1256211'
+                            }
+                        }],
+                    // Params shared between all bidders
+                    ortb2Imp: {
+                        ext: {
+                            data: {
+                                divId: "web-destiny-2-display-footer-d",
+                                placement: "footer-w",
+                            }
+                        }
+                    }
+                },
+                {
+                    code: '/21974715207/web-destiny-2-display-footer-m',
+                    mediaTypes: {
+                        banner: {
+                            sizes: div_display_footer_m_sizes
+                        }
+                    },
+                    bids: [
+                        {
+                            bidder: 'pubmatic',
+                            params: {
+                                publisherId: '165261',
+                                adSlot: '6141443'
+                            }
+                        },
+                        {
+                            bidder: 'appnexus',
+                            params: {
+                                placementId: 34122291,
+                                allowSmallerSizes: true,
+                                position: 'above'
+                            }
+                        },
+                        {
+                            bidder: "adagio",
+                            params: {
+                                organizationId: "1458",
+                                site: "mobalytics-gg",
+                            }
+                        },
+                        {
+                            bidder: 'oms',
+                            params: {
+                                publisherId: '21048',
+                            }
+                        },
+                        {
+                            bidder: 'sovrn',
+                            params: {
+                                tagid: '1256212'
+                            }
+                        }],
+                    // Params shared between all bidders
+                    ortb2Imp: {
+                        ext: {
+                            data: {
+                                divId: "web-destiny-2-display-footer-m",
+                                placement: "footer-s",
+                            }
+                        }
+                    }
+                },
+            ];
+
+            const customConfigObject = {
+                "buckets": [
+                    {
+                        "max": 3,
+                        "increment": 0.01
+                    },
+                    {
+                        "max": 5,
+                        "increment": 0.05
+                    },
+                    {
+                        "max": 9,
+                        "increment": 0.1
+                    },
+                    {
+                        "max": 40,
+                        "increment": 0.5
+                    },
+                    {
+                        "max": 100,
+                        "increment": 10.00
+                    }
+                ]
+            };
+
+            // ======== DO NOT EDIT BELOW THIS LINE =========== //
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            googletag.cmd.push(function () {
+                googletag.pubads().disableInitialLoad();
+            });
+
             var pbjs = pbjs || {};
             pbjs.que = pbjs.que || [];
 
@@ -437,37 +438,44 @@
             setTimeout(function () {
                 initAdserver();
             }, FAILSAFE_TIMEOUT);
-        });
 
-        // ====================================== //
+            // ====================================== //
 
-        googletag.cmd.push(function () {
-            const adSlots = [
-                { path: '/21974715207/web-destiny-2-display-m', sizes: div_display_m_sizes, id: 'div_display_m' },
-                { path: '/21974715207/web-destiny-2-display-l', sizes: div_display_l_sizes, id: 'div_display_l' },
-                { path: '/21974715207/web-destiny-2-display-footer-d', sizes: div_display_footer_d_sizes, id: 'div_display_footer_d' },
-                { path: '/21974715207/web-destiny-2-display-footer-m', sizes: div_display_footer_m_sizes, id: 'div_display_footer_m' }
-            ];
+            googletag.cmd.push(function () {
+                const adSlots = [
+                    { path: '/21974715207/web-destiny-2-display-m', sizes: div_display_m_sizes, id: 'div_display_m' },
+                    { path: '/21974715207/web-destiny-2-display-l', sizes: div_display_l_sizes, id: 'div_display_l' },
+                    { path: '/21974715207/web-destiny-2-display-footer-d', sizes: div_display_footer_d_sizes, id: 'div_display_footer_d' },
+                    { path: '/21974715207/web-destiny-2-display-footer-m', sizes: div_display_footer_m_sizes, id: 'div_display_footer_m' }
+                ];
 
-            adSlots.forEach(slot => {
-                googletag.defineSlot(slot.path, slot.sizes, slot.id).addService(googletag.pubads());
+                adSlots.forEach(slot => {
+                    googletag.defineSlot(slot.path, slot.sizes, slot.id).addService(googletag.pubads());
+                });
+
+                googletag.pubads().enableSingleRequest();
+
+                googletag.pubads().addEventListener('impressionViewable', function (event) {
+                    var slot = event.slot;
+                    if (slot.getSlotElementId() === "div_display_m") {
+                        setTimeout(function () {
+                            refreshBid()
+                        }, REFRESH_INTERVAL);
+                    }
+                });
+
+                googletag.enableServices();
             });
 
-            googletag.pubads().enableSingleRequest();
 
-            googletag.pubads().addEventListener('impressionViewable', function (event) {
-                var slot = event.slot;
-                if (slot.getSlotElementId() === "div_display_m") {
-                    setTimeout(function () {
-                        refreshBid()
-                    }, REFRESH_INTERVAL);
-                }
-            });
-
-            googletag.enableServices();
-        });
-
+        })
     </script>
+
+
+
+
+
+
 </head>
 
 <body>
