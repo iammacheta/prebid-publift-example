@@ -290,22 +290,16 @@
             ]
         };
 
-        function checkGooglefcReady(callback) {
-            let attempts = 0;
-            const maxAttempts = 30; // Increase max attempts
-            const interval = 100; // Increase interval as needed
-
-            const checkInterval = setInterval(() => {
-                if (typeof googlefc !== 'undefined') {
-                    clearInterval(checkInterval);
-                    console.log("Google Funding Choices loaded.");
-                    callback();
-                } else if (++attempts >= maxAttempts) {
-                    clearInterval(checkInterval);
-                    console.log("Google Funding Choices (googlefc) didn't load in time.");
-                    callback();
-                }
-            }, interval);
+        function checkGooglefcReady(callback, attempts = 0, maxAttempts = 50, interval = 100) {
+            if (typeof googlefc !== 'undefined') {
+                console.log("Google Funding Choices loaded.");
+                callback();
+            } else if (attempts < maxAttempts) {
+                setTimeout(() => checkGooglefcReady(callback, attempts + 1, maxAttempts, interval), interval);
+            } else {
+                console.log("Google Funding Choices (googlefc) didn't load in time.");
+                callback();
+            }
         }
 
         // ======== DO NOT EDIT BELOW THIS LINE =========== //
