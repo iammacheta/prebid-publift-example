@@ -16,7 +16,7 @@
             const interval = 100; // Check every 100ms
 
             const checkInterval = setInterval(() => {
-                if (typeof googlefc !== 'undefined' && googlefc.hasConsent) {
+                if (typeof googlefc !== 'undefined') {
                     clearInterval(checkInterval);
                     console.log("googlefc is ready, run the Prebid code")
                     callback(); // `googlefc` is ready, run the Prebid code
@@ -470,12 +470,7 @@
 
         })
     </script>
-
-
-
-
-
-
+    
 </head>
 
 <body>
