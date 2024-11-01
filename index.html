@@ -297,127 +297,147 @@
             googletag.pubads().disableInitialLoad();
         });
 
-        var pbjs = pbjs || {};
-        pbjs.que = pbjs.que || [];
+        function checkGooglefcReady(callback) {
+            let attempts = 0;
+            const maxAttempts = 20; // Limit to prevent infinite looping
+            const interval = 100; // Check every 100ms
 
-        pbjs.que.push(function () {
-            pbjs.onEvent('auctionDebug', function (eventData) {
-                if (
-                    eventData &&
-                    eventData.type === 'ERROR' &&
-                    eventData.arguments &&
-                    eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
-                ) {
-                    console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
+            const checkInterval = setInterval(() => {
+                if (typeof googlefc !== 'undefined' && googlefc.hasConsent) {
+                    clearInterval(checkInterval);
+                    console.log("googlefc is ready, run the Prebid code")
+                    callback(); // `googlefc` is ready, run the Prebid code
+                } else if (++attempts >= maxAttempts) {
+                    clearInterval(checkInterval);
+                    console.warn("Google Funding Choices (googlefc) didn't load in time.");
+                    callback(); // Fallback - execute Prebid code even if googlefc isn't ready
                 }
-            });
-        });
+            }, interval);
+        }
 
-        pbjs.que.push(function () {
-            pbjs.bidderSettings = {
-                standard: {
-                    storageAllowed: false
-                },
-                appnexus: {
-                    storageAllowed: true
-                },
-                pubmatic: {
-                    storageAllowed: true
-                },
-                openx: {
-                    storageAllowed: true
-                },
-                ix: {
-                    storageAllowed: true
-                },
-                rubicon: {
-                    storageAllowed: true
-                },
-                sovrn: {
-                    storageAllowed: true
-                },
-                smartadserver: {
-                    storageAllowed: true
-                },
-                criteo: {
-                    storageAllowed: true
-                },
-                ogury: {
-                    storageAllowed: true
-                },
-                adagio: {
-                    storageAllowed: true
-                }
-            }
+        checkGooglefcReady(() => {
+            var pbjs = pbjs || {};
+            pbjs.que = pbjs.que || [];
 
-            pbjs.setConfig({
-                enableSendAllBids: false,
-                enableTIDs: true,
-                priceGranularity: customConfigObject,
-                consentManagement: {
-                    "gdpr": {
-                        "cmpApi": "iab",
-                        "timeout": 3000,
-                        "defaultGdprScope": true,
-                        "allowAuctionWithoutConsent": true
+            pbjs.que.push(function () {
+                pbjs.onEvent('auctionDebug', function (eventData) {
+                    if (
+                        eventData &&
+                        eventData.type === 'ERROR' &&
+                        eventData.arguments &&
+                        eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
+                    ) {
+                        console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
                     }
-                },
-                gptPreAuction: {
-                    enabled: true,
-                },
-                currency: {
-                    adServerCurrency: 'USD',
-                    granularityMultiplier: 1,
-                    defaultRates: {
-                        'EUR': 1.10,
-                        'GBP': 1.30
+                });
+            });
+
+            pbjs.que.push(function () {
+                pbjs.bidderSettings = {
+                    standard: {
+                        storageAllowed: false
                     },
-                    conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
-                },
-                deviceAccess: true,
-                userSync: {
-                    filterSettings: {
-                        iframe: {
-                            bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury', 'adagio'],
-                            filter: 'include'
+                    appnexus: {
+                        storageAllowed: true
+                    },
+                    pubmatic: {
+                        storageAllowed: true
+                    },
+                    openx: {
+                        storageAllowed: true
+                    },
+                    ix: {
+                        storageAllowed: true
+                    },
+                    rubicon: {
+                        storageAllowed: true
+                    },
+                    sovrn: {
+                        storageAllowed: true
+                    },
+                    smartadserver: {
+                        storageAllowed: true
+                    },
+                    criteo: {
+                        storageAllowed: true
+                    },
+                    ogury: {
+                        storageAllowed: true
+                    },
+                    adagio: {
+                        storageAllowed: true
+                    }
+                }
+
+                pbjs.setConfig({
+                    enableSendAllBids: false,
+                    enableTIDs: true,
+                    priceGranularity: customConfigObject,
+                    consentManagement: {
+                        "gdpr": {
+                            "cmpApi": "iab",
+                            "timeout": 3000,
+                            "defaultGdprScope": true,
+                            "allowAuctionWithoutConsent": true
+                        }
+                    },
+                    gptPreAuction: {
+                        enabled: true,
+                    },
+                    currency: {
+                        adServerCurrency: 'USD',
+                        granularityMultiplier: 1,
+                        defaultRates: {
+                            'EUR': 1.10,
+                            'GBP': 1.30
+                        },
+                        conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
+                    },
+                    deviceAccess: true,
+                    userSync: {
+                        filterSettings: {
+                            iframe: {
+                                bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury', 'adagio'],
+                                filter: 'include'
+                            }
                         }
                     }
-                }
-            });
-            pbjs.addAdUnits(adUnits);
-            pbjs.requestBids({
-                bidsBackHandler: initAdserver,
-                timeout: PREBID_TIMEOUT
-            });
-        });
-
-        function initAdserver() {
-            if (pbjs.initAdserverSet) return;
-            pbjs.initAdserverSet = true;
-            googletag.cmd.push(function () {
-                pbjs.que.push(function () {
-                    pbjs.setTargetingForGPTAsync();
-                    googletag.pubads().refresh();
                 });
-            });
-        }
-
-        function refreshBid() {
-            pbjs.que.push(function () {
+                pbjs.addAdUnits(adUnits);
                 pbjs.requestBids({
-                    timeout: PREBID_TIMEOUT,
-                    adUnitCodes: ['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m'],
-                    bidsBackHandler: function () {
-                        pbjs.setTargetingForGPTAsync(['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m']);
-                        googletag.pubads().refresh();
-                    }
+                    bidsBackHandler: initAdserver,
+                    timeout: PREBID_TIMEOUT
                 });
             });
-        }
 
-        setTimeout(function () {
-            initAdserver();
-        }, FAILSAFE_TIMEOUT);
+            function initAdserver() {
+                if (pbjs.initAdserverSet) return;
+                pbjs.initAdserverSet = true;
+                googletag.cmd.push(function () {
+                    pbjs.que.push(function () {
+                        pbjs.setTargetingForGPTAsync();
+                        googletag.pubads().refresh();
+                    });
+                });
+            }
+
+            function refreshBid() {
+                pbjs.que.push(function () {
+                    pbjs.requestBids({
+                        timeout: PREBID_TIMEOUT,
+                        adUnitCodes: ['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m'],
+                        bidsBackHandler: function () {
+                            pbjs.setTargetingForGPTAsync(['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m']);
+                            googletag.pubads().refresh();
+                        }
+                    });
+                });
+            }
+
+            setTimeout(function () {
+                initAdserver();
+            }, FAILSAFE_TIMEOUT);
+        });
 
         // ====================================== //
 
