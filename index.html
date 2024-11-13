@@ -4,9 +4,10 @@
 
 <head>
     <link rel="icon" type="image/png" href="/favicon.png">
+
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script async
-        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@5124866bffb7407b8f45b21be528feae8f4a87eb/prebid.js"></script>
+        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@e50b7b6e7acfcb891dbc88b8b21caaa95b5298d2/prebid.js"></script>
     <!-- <script async src="https://storage.cloud.google.com/cdn.mobalytics.gg/assets/common/prebid/prebid.js"></script> -->
 
     <script>
@@ -54,7 +55,6 @@
 
         var PREBID_TIMEOUT = 2000;
         var FAILSAFE_TIMEOUT = 3000;
-        var REFRESH_INTERVAL = 30000;
 
         var adUnits = [
             {
@@ -97,6 +97,13 @@
                         bidder: 'sovrn',
                         params: {
                             tagid: '1256209'
+                        }
+                    },
+                    {
+                        bidder: 'openx',
+                        params: {
+                            unit: '561445368',
+                            delDomain: 'mobalytics-d.openx.net',
                         }
                     }],
                 // Params shared between all bidders
@@ -149,6 +156,13 @@
                         params: {
                             tagid: '1256210'
                         }
+                    },
+                    {
+                        bidder: 'openx',
+                        params: {
+                            unit: '561445369',
+                            delDomain: 'mobalytics-d.openx.net',
+                        }
                     }],
                 // Params shared between all bidders
                 ortb2Imp: {
@@ -199,6 +213,13 @@
                         bidder: 'sovrn',
                         params: {
                             tagid: '1256211'
+                        }
+                    },
+                    {
+                        bidder: 'openx',
+                        params: {
+                            unit: '561445370',
+                            delDomain: 'mobalytics-d.openx.net',
                         }
                     }],
                 // Params shared between all bidders
@@ -252,6 +273,13 @@
                         params: {
                             tagid: '1256212'
                         }
+                    },
+                    {
+                        bidder: 'openx',
+                        params: {
+                            unit: '561445371',
+                            delDomain: 'mobalytics-d.openx.net',
+                        }
                     }],
                 // Params shared between all bidders
                 ortb2Imp: {
@@ -290,179 +318,147 @@
             ]
         };
 
-        function checkGooglefcReady(callback, attempts = 0, maxAttempts = 50, interval = 100) {
-            if (typeof googlefc !== 'undefined') {
-                console.log("Google Funding Choices loaded.");
-                callback();
-            } else if (attempts < maxAttempts) {
-                setTimeout(() => checkGooglefcReady(callback, attempts + 1, maxAttempts, interval), interval);
-            } else {
-                console.log("Google Funding Choices (googlefc) didn't load in time.");
-                callback();
+        // ======== DO NOT EDIT BELOW THIS LINE =========== //
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        googletag.cmd.push(function () {
+            googletag.pubads().disableInitialLoad();
+        });
+
+        var pbjs = pbjs || {};
+        pbjs.que = pbjs.que || [];
+
+        pbjs.que.push(function () {
+            pbjs.onEvent('auctionDebug', function (eventData) {
+                if (
+                    eventData &&
+                    eventData.type === 'ERROR' &&
+                    eventData.arguments &&
+                    eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
+                ) {
+                    console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
+                }
+            });
+        });
+
+        pbjs.que.push(function () {
+            pbjs.bidderSettings = {
+                standard: {
+                    storageAllowed: false
+                },
+                appnexus: {
+                    storageAllowed: true
+                },
+                pubmatic: {
+                    storageAllowed: true
+                },
+                openx: {
+                    storageAllowed: true
+                },
+                ix: {
+                    storageAllowed: true
+                },
+                rubicon: {
+                    storageAllowed: true
+                },
+                sovrn: {
+                    storageAllowed: true
+                },
+                smartadserver: {
+                    storageAllowed: true
+                },
+                criteo: {
+                    storageAllowed: true
+                },
+                ogury: {
+                    storageAllowed: true
+                },
+                adagio: {
+                    storageAllowed: true
+                }
             }
-        }
 
-
-
-        checkGooglefcReady(() => {
-
-            // ======== DO NOT EDIT BELOW THIS LINE =========== //
-            var googletag = googletag || {};
-            googletag.cmd = googletag.cmd || [];
-            googletag.cmd.push(function () {
-                googletag.pubads().disableInitialLoad();
-            });
-
-            var pbjs = pbjs || {};
-            pbjs.que = pbjs.que || [];
-
-            pbjs.que.push(function () {
-                pbjs.onEvent('auctionDebug', function (eventData) {
-                    if (
-                        eventData &&
-                        eventData.type === 'ERROR' &&
-                        eventData.arguments &&
-                        eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
-                    ) {
-                        console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
+            pbjs.setConfig({
+                enableSendAllBids: false,
+                enableTIDs: true,
+                priceGranularity: customConfigObject,
+                consentManagement: {
+                    "gdpr": {
+                        "cmpApi": "iab",
+                        "timeout": 500,
+                        "actionTimeout": 10000,
+                        "defaultGdprScope": true,
+                        "allowAuctionWithoutConsent": true
+                    },
+                    usp: {
+                        cmpApi: 'iab',
+                        timeout: 500,
                     }
-                });
-            });
-
-            pbjs.que.push(function () {
-                pbjs.bidderSettings = {
-                    standard: {
-                        storageAllowed: false
+                },
+                gptPreAuction: {
+                    enabled: true,
+                },
+                currency: {
+                    adServerCurrency: 'USD',
+                    granularityMultiplier: 1,
+                    defaultRates: {
+                        'EUR': 1.10,
+                        'GBP': 1.30
                     },
-                    appnexus: {
-                        storageAllowed: true
-                    },
-                    pubmatic: {
-                        storageAllowed: true
-                    },
-                    openx: {
-                        storageAllowed: true
-                    },
-                    ix: {
-                        storageAllowed: true
-                    },
-                    rubicon: {
-                        storageAllowed: true
-                    },
-                    sovrn: {
-                        storageAllowed: true
-                    },
-                    smartadserver: {
-                        storageAllowed: true
-                    },
-                    criteo: {
-                        storageAllowed: true
-                    },
-                    ogury: {
-                        storageAllowed: true
-                    },
-                    adagio: {
-                        storageAllowed: true
+                    conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
+                },
+                deviceAccess: true,
+                userSync: {
+                    filterSettings: {
+                        iframe: {
+                            bidders: '*',
+                            filter: 'include'
+                        }
                     }
                 }
-
-                pbjs.setConfig({
-                    enableSendAllBids: false,
-                    enableTIDs: true,
-                    priceGranularity: customConfigObject,
-                    consentManagement: {
-                        "gdpr": {
-                            "cmpApi": "iab",
-                            "timeout": 3000,
-                            "defaultGdprScope": true,
-                            "allowAuctionWithoutConsent": true
-                        }
-                    },
-                    gptPreAuction: {
-                        enabled: true,
-                    },
-                    currency: {
-                        adServerCurrency: 'USD',
-                        granularityMultiplier: 1,
-                        defaultRates: {
-                            'EUR': 1.10,
-                            'GBP': 1.30
-                        },
-                        conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
-                    },
-                    deviceAccess: true,
-                    userSync: {
-                        filterSettings: {
-                            iframe: {
-                                bidders: ['pubmatic', 'appnexus', 'openx', 'ix', 'rubicon', 'sovrn', 'smartadserver', 'criteo', 'ogury', 'adagio'],
-                                filter: 'include'
-                            }
-                        }
-                    }
-                });
-                pbjs.addAdUnits(adUnits);
-                pbjs.requestBids({
-                    bidsBackHandler: initAdserver,
-                    timeout: PREBID_TIMEOUT
-                });
             });
+            pbjs.addAdUnits(adUnits);
+            pbjs.requestBids({
+                bidsBackHandler: initAdserver,
+                timeout: PREBID_TIMEOUT
+            });
+        });
 
-            function initAdserver() {
-                if (pbjs.initAdserverSet) return;
-                pbjs.initAdserverSet = true;
-                googletag.cmd.push(function () {
-                    pbjs.que.push(function () {
-                        pbjs.setTargetingForGPTAsync();
-                        googletag.pubads().refresh();
-                    });
-                });
-            }
-
-            function refreshBid() {
-                pbjs.que.push(function () {
-                    pbjs.requestBids({
-                        timeout: PREBID_TIMEOUT,
-                        adUnitCodes: ['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m'],
-                        bidsBackHandler: function () {
-                            pbjs.setTargetingForGPTAsync(['/21974715207/web-destiny-2-display-m', '/21974715207/web-destiny-2-display-l', '/21974715207/web-destiny-2-display-footer-d', '/21974715207/web-destiny-2-display-footer-m']);
-                            googletag.pubads().refresh();
-                        }
-                    });
-                });
-            }
-
-            setTimeout(function () {
-                initAdserver();
-            }, FAILSAFE_TIMEOUT);
-
-            // ====================================== //
-
+        function initAdserver() {
+            if (pbjs.initAdserverSet) return;
+            pbjs.initAdserverSet = true;
             googletag.cmd.push(function () {
-                const adSlots = [
-                    { path: '/21974715207/web-destiny-2-display-m', sizes: div_display_m_sizes, id: 'div_display_m' },
-                    { path: '/21974715207/web-destiny-2-display-l', sizes: div_display_l_sizes, id: 'div_display_l' },
-                    { path: '/21974715207/web-destiny-2-display-footer-d', sizes: div_display_footer_d_sizes, id: 'div_display_footer_d' },
-                    { path: '/21974715207/web-destiny-2-display-footer-m', sizes: div_display_footer_m_sizes, id: 'div_display_footer_m' }
-                ];
-
-                adSlots.forEach(slot => {
-                    googletag.defineSlot(slot.path, slot.sizes, slot.id).addService(googletag.pubads());
+                pbjs.que.push(function () {
+                    pbjs.setTargetingForGPTAsync();
+                    googletag.pubads().refresh();
                 });
-
-                googletag.pubads().enableSingleRequest();
-
-                googletag.pubads().addEventListener('impressionViewable', function (event) {
-                    var slot = event.slot;
-                    if (slot.getSlotElementId() === "div_display_m") {
-                        setTimeout(function () {
-                            refreshBid()
-                        }, REFRESH_INTERVAL);
-                    }
-                });
-
-                googletag.enableServices();
             });
+        }
+        setTimeout(function () {
+            initAdserver();
+        }, FAILSAFE_TIMEOUT);
 
+        // ====================================== //
+
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/21974715207/web-destiny-2-display-l', div_display_l_sizes, 'div_display_l').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-d', div_display_footer_d_sizes, 'div_display_footer_d').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-m', div_display_footer_m_sizes, 'div_display_footer_m').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
         });
     </script>
 </head>
