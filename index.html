@@ -464,6 +464,7 @@
             googletag.cmd.push(function () {
                 pbjs.que.push(function () {
                     pbjs.setTargetingForGPTAsync();
+                    googletag.pubads().setTargeting("refresh_N", "1");
                     googletag.pubads().refresh();
                 });
             });
