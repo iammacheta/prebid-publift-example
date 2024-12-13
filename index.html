@@ -464,6 +464,13 @@
                             filter: 'include'
                         }
                     },
+                    encryptedSignalSources: {
+                        "sources": [{
+                            source: ['uidapi.com', 'pubcid.org'],
+                            encrypt: false
+                        }],
+                        "registerDelay": 3000
+                    },
                     userIds: [{
                         name: "sharedId",
                         storage: {
@@ -483,6 +490,7 @@
                     }]
                 }
             });
+            pbjs.registerSignalSources();
             pbjs.addAdUnits(adUnits);
             pbjs.requestBids({
                 bidsBackHandler: initAdserver,
