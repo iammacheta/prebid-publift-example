@@ -405,6 +405,9 @@
             }
 
             pbjs.setConfig({
+                useBidCache: true,
+                minBidCacheTTL: 10,
+                eventHistoryTTL: 10,
                 enableSendAllBids: false,
                 enableTIDs: true,
                 priceGranularity: customConfigObject,
