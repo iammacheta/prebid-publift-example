@@ -7,14 +7,13 @@
 
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script async
-        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@c910dfaf552fc1aa0284250cecd7b4dbe74362f8/prebid.js"></script>
+        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@6e53193d5e03248ce36534294166c50ce159d816/prebid.js"></script>
     <!-- <script async src="https://storage.cloud.google.com/cdn.mobalytics.gg/assets/common/prebid/prebid.js"></script> -->
 
     <script>
         var div_display_m_sizes = [
             [300, 250],
             [336, 280],
-            [338, 280],
             [300, 50],
             [320, 100],
             [300, 100],
@@ -24,8 +23,6 @@
         var div_display_l_sizes = [
             [300, 250],
             [336, 280],
-            [338, 280],
-            [120, 240],
             [320, 50],
             [320, 100],
             [300, 50],
@@ -33,24 +30,15 @@
             [250, 360],
             [250, 250],
             [200, 200],
-            [320, 480],
-            [240, 400],
-            [160, 600],
-            [300, 600],
-            [120, 600],
         ];
         var div_display_footer_d_sizes = [
             [728, 90],
-            [970, 90],
-            [750, 100],
-            [980, 120],
         ];
         var div_display_footer_m_sizes = [
             [320, 50],
             [320, 100],
             [300, 50],
             [300, 100],
-            [468, 60],
         ];
 
         var PREBID_TIMEOUT = 2000;
@@ -120,7 +108,15 @@
                             pageId: 2035035,
                             formatId: 135866,
                         },
-                    }],
+                    },
+                    {
+                        bidder: 'gumgum',
+                        params: {
+                            zone: 'bdppvphq',
+                            slot: '1155240'
+                        }
+                    }
+                ],
                 ortb2Imp: {
                     ext: {
                         data: {
@@ -192,12 +188,58 @@
                             pageId: 2035036,
                             formatId: 135867,
                         },
-                    }],
+                    },
+                    {
+                        bidder: 'gumgum',
+                        params: {
+                            zone: 'bdppvphq',
+                            slot: '1273326'
+                        }
+                    }
+                ],
                 ortb2Imp: {
                     ext: {
                         data: {
                             divId: "web-destiny-2-display-l",
                             placement: "sidebar-2",
+                        }
+                    }
+                }
+            },
+            {
+                code: '/21974715207/web-destiny-2-display-3',
+                mediaTypes: {
+                    banner: {
+                        sizes: div_display_m_sizes
+                    }
+                },
+                bids: [
+                    {
+                        bidder: "adagio",
+                        params: {
+                            organizationId: "1458",
+                            site: "mobalytics-gg",
+                        }
+                    },
+                    {
+                        bidder: 'oms',
+                        params: {
+                            publisherId: '21048',
+                        }
+                    },
+                    {
+                        bidder: 'gumgum',
+                        params: {
+                            zone: 'bdppvphq',
+                            slot: '1273323'
+                        }
+                    }
+                ],
+                ortb2Imp: {
+                    ext: {
+                        data: {
+                            divId: "web-destiny-2-display-3",
+                            placement: "sidebar-3",
                         }
                     }
                 }
@@ -264,7 +306,15 @@
                             pageId: 2035037,
                             formatId: 135868,
                         },
-                    }],
+                    },
+                    {
+                        bidder: 'gumgum',
+                        params: {
+                            zone: 'bdppvphq',
+                            slot: '1273327'
+                        }
+                    }
+                ],
                 ortb2Imp: {
                     ext: {
                         data: {
@@ -337,6 +387,13 @@
                             pageId: 2035038,
                             formatId: 135869,
                         },
+                    },
+                    {
+                        bidder: 'gumgum',
+                        params: {
+                            zone: 'bdppvphq',
+                            slot: '1273329'
+                        }
                     }],
                 ortb2Imp: {
                     ext: {
