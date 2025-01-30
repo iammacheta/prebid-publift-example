@@ -115,6 +115,12 @@
                             zone: 'bdppvphq',
                             slot: '1155240'
                         }
+                    },
+                    {
+                        bidder: 'inmobi',
+                        params: {
+                            plc: '10000167297',
+                        }
                     }
                 ],
                 ortb2Imp: {
@@ -195,6 +201,12 @@
                             zone: 'bdppvphq',
                             slot: '1273326'
                         }
+                    },
+                    {
+                        bidder: 'inmobi',
+                        params: {
+                            plc: '10000167298',
+                        }
                     }
                 ],
                 ortb2Imp: {
@@ -232,6 +244,12 @@
                         params: {
                             zone: 'bdppvphq',
                             slot: '1273323'
+                        }
+                    },
+                    {
+                        bidder: 'inmobi',
+                        params: {
+                            plc: '10000167299',
                         }
                     }
                 ],
@@ -312,6 +330,12 @@
                         params: {
                             zone: 'bdppvphq',
                             slot: '1273327'
+                        }
+                    },
+                    {
+                        bidder: 'inmobi',
+                        params: {
+                            plc: '10000167300',
                         }
                     }
                 ],
@@ -394,7 +418,14 @@
                             zone: 'bdppvphq',
                             slot: '1273329'
                         }
-                    }],
+                    },
+                    {
+                        bidder: 'inmobi',
+                        params: {
+                            plc: '10000167301',
+                        }
+                    }
+                ],
                 ortb2Imp: {
                     ext: {
                         data: {
@@ -588,6 +619,11 @@
             googletag.enableServices();
         });
         googletag.cmd.push(function () {
+            googletag.defineSlot('/21974715207/web-destiny-2-display-3', div_display_m_sizes, 'div_display_3').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+        googletag.cmd.push(function () {
             googletag.defineSlot('/21974715207/web-destiny-2-display-footer-d', div_display_footer_d_sizes, 'div_display_footer_d').addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
@@ -615,11 +651,21 @@
     <br>
 
     <h5>Div display_l</h5>
-    <div id='div_display_l' style='width: 300px; height: 600px;'>
+    <div id='div_display_l' style='width: 336px; height: 280px;'>
         <script type='text/javascript'>
             googletag.cmd.push(function () {
                 googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_l');
+            });
+        </script>
+    </div>
+
+    <h5>Div display_3</h5>
+    <div id='div_display_3' style='width: 336px; height: 280px;'>
+        <script type='text/javascript'>
+            googletag.cmd.push(function () {
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display('div_display_3');
             });
         </script>
     </div>
