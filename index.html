@@ -96,7 +96,7 @@
 
         // Function that waits until googlefc is available
         function waitForGoogleFC(callback) {
-            if (typeof googlefc !== 'undefined' && googlefc.callbackQueue) {
+            if (typeof window.googlefc !== 'undefined' && window.googlefc.callbackQueue) {
                 callback();
             } else {
                 setTimeout(function () {
@@ -106,7 +106,7 @@
         }
 
         waitForGoogleFC(function () {
-            googlefc.callbackQueue.push({
+            window.googlefc.callbackQueue.push({
                 'CONSENT_API_READY': function () {
                     var pbjs = pbjs || {};
                     pbjs.que = pbjs.que || [];
