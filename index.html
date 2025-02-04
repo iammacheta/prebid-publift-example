@@ -87,12 +87,7 @@
             ]
         };
 
-        // ======== DO NOT EDIT BELOW THIS LINE =========== //
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        googletag.cmd.push(function () {
-            googletag.pubads().disableInitialLoad();
-        });
+
 
         // Function that waits until googlefc is available
         function waitForGoogleFC(callback) {
@@ -108,6 +103,14 @@
         waitForGoogleFC(function () {
             window.googlefc.callbackQueue.push({
                 'CONSENT_API_READY': function () {
+
+                    // ======== DO NOT EDIT BELOW THIS LINE =========== //
+                    var googletag = googletag || {};
+                    googletag.cmd = googletag.cmd || [];
+                    googletag.cmd.push(function () {
+                        googletag.pubads().disableInitialLoad();
+                    });
+
                     var pbjs = pbjs || {};
                     pbjs.que = pbjs.que || [];
 
@@ -251,6 +254,29 @@
                             bidsBackHandler: initAdserver,
                             timeout: PREBID_TIMEOUT
                         });
+                    });
+                    
+                    function initAdserver() {
+                        if (pbjs.initAdserverSet) return;
+                        pbjs.initAdserverSet = true;
+                        googletag.cmd.push(function () {
+                            pbjs.que.push(function () {
+                                pbjs.setTargetingForGPTAsync();
+                                googletag.pubads().setTargeting("refresh_N", "1");
+                                googletag.pubads().refresh();
+                            });
+                        });
+                    }
+                    setTimeout(function () {
+                        initAdserver();
+                    }, FAILSAFE_TIMEOUT);
+
+                    // ====================================== //
+
+                    googletag.cmd.push(function () {
+                        googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
+                        googletag.pubads().enableSingleRequest();
+                        googletag.enableServices();
                     });
                 }
             });
