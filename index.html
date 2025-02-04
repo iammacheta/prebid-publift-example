@@ -611,6 +611,7 @@
                     timeout: PREBID_TIMEOUT
                 });
                 // Resolve the Promise once configuration is complete
+                console.log("setConfig - finished")
                 resolve();
             });
         });
@@ -619,6 +620,7 @@
         const gptLoaded = new Promise(resolve => {
             window.googletag.cmd.push(function () {
                 // GPT is loaded—resolve the Promise.
+                console.log("googletag - finished")
                 resolve();
             });
         });
@@ -627,7 +629,9 @@
         Promise.all([prebidConfigured, gptLoaded])
             .then(() => {
                 // Now that both systems are ready, register signal sources
+                console.log("Both prebidConfigured, gptLoaded")
                 pbjs.registerSignalSources();
+                console.log("registerSignalSources triggered")
             });
 
         /********* GPT Setup for Ad Slots **********/
