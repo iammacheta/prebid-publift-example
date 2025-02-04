@@ -484,16 +484,18 @@
             ]
         };
 
-        // ======== DO NOT EDIT BELOW THIS LINE =========== //
 
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-
-        var pbjs = pbjs || {};
-        pbjs.que = pbjs.que || [];
 
         async function firstBlock() {
             console.log("Выполняем первый блок...");
+
+            // ======== DO NOT EDIT BELOW THIS LINE =========== //
+
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+
+            var pbjs = pbjs || {};
+            pbjs.que = pbjs.que || [];
 
             googletag.cmd.push(function () {
                 googletag.pubads().disableInitialLoad();
