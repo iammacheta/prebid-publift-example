@@ -522,39 +522,45 @@
                 enableTIDs: true,
                 priceGranularity: customConfigObject,
                 consentManagement: {
-                    "gdpr": {
-                        "cmpApi": "iab",
-                        "timeout": 500,
-                        "actionTimeout": 10000,
-                        "defaultGdprScope": false,
-                        "allowAuctionWithoutConsent": true,
-                        rules: [{
-                            purpose: "storage",
-                            enforcePurpose: true,
-                            enforceVendor: true,
-                            vendorExceptions: ["uid2"]
-                        }, {
-                            purpose: "basicAds",
-                            enforcePurpose: true,
-                            enforceVendor: true,
-                            vendorExceptions: ["uid2"]
-                        }, {
-                            purpose: "personalizedAds",
-                            enforcePurpose: true,
-                            enforceVendor: true,
-                            vendorExceptions: ["uid2"]
-                        }, {
-                            purpose: "measurement",
-                            enforcePurpose: true,
-                            enforceVendor: true
-                        }, {
-                            purpose: "transmitPreciseGeo",
-                            enforcePurpose: true
-                        }]
+                    gdpr: {
+                        cmpApi: "iab",
+                        timeout: 500,
+                        actionTimeout: 10000,
+                        defaultGdprScope: true,
+                        allowAuctionWithoutConsent: true,
+                        rules: [
+                            {
+                                purpose: "storage",
+                                enforcePurpose: true,
+                                enforceVendor: true,
+                                vendorExceptions: ["uid2"]
+                            },
+                            {
+                                purpose: "basicAds",
+                                enforcePurpose: true,
+                                enforceVendor: true,
+                                vendorExceptions: ["uid2"]
+                            },
+                            {
+                                purpose: "personalizedAds",
+                                enforcePurpose: true,
+                                enforceVendor: true,
+                                vendorExceptions: ["uid2"]
+                            },
+                            {
+                                purpose: "measurement",
+                                enforcePurpose: true,
+                                enforceVendor: true
+                            },
+                            {
+                                purpose: "transmitPreciseGeo",
+                                enforcePurpose: true
+                            }
+                        ]
                     },
                     usp: {
-                        cmpApi: 'iab',
-                        timeout: 500,
+                        cmpApi: "iab",
+                        timeout: 500
                     }
                 },
                 gptPreAuction: {
@@ -579,7 +585,7 @@
                     },
                     encryptedSignalSources: {
                         "sources": [{
-                            source: ['uidapi.com', 'pubcid.org'],
+                            source: ['uidapi.com', 'pubcid.org', 'id5-sync.com'],
                             encrypt: false
                         }],
                         "registerDelay": 3000
