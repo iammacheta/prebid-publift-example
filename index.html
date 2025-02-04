@@ -504,7 +504,7 @@
 
         async function secondBlock() {
             console.log("Ждём перед вторым блоком...");
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 500));
 
             console.log("Выполняем второй блок...");
 
@@ -542,7 +542,7 @@
                     consentManagement: {
                         gdpr: {
                             cmpApi: "iab",
-                            timeout: 500,
+                            timeout: 1000,
                             actionTimeout: 10000,
                             defaultGdprScope: true,
                             allowAuctionWithoutConsent: true,
@@ -578,7 +578,7 @@
                         },
                         usp: {
                             cmpApi: "iab",
-                            timeout: 500
+                            timeout: 1000
                         }
                     },
                     gptPreAuction: {
@@ -646,7 +646,7 @@
 
         async function thirdBlock() {
             console.log("Ждём перед третьим блоком...");
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 500));
 
             console.log("Выполняем третий блок...");
             pbjs.registerSignalSources();
