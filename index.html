@@ -508,7 +508,30 @@
 
             console.log("Выполняем второй блок...");
 
+
+            var pbjs = pbjs || {};
+            pbjs.que = pbjs.que || [];
+
             pbjs.que.push(function () {
+                pbjs.onEvent('auctionDebug', function (eventData) {
+                    if (
+                        eventData &&
+                        eventData.type === 'ERROR' &&
+                        eventData.arguments &&
+                        eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
+                    ) {
+                        console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
+                    }
+                });
+            });
+
+            pbjs.que.push(function () {
+                pbjs.bidderSettings = {
+                    standard: {
+                        storageAllowed: true
+                    }
+                }
+
                 pbjs.setConfig({
                     useBidCache: true,
                     minBidCacheTTL: 10,
@@ -633,19 +656,45 @@
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             console.log("Выполняем третий блок...");
+            pbjs.registerSignalSources();
+            pbjs.addAdUnits(adUnits);
+            pbjs.requestBids({
+                bidsBackHandler: initAdserver,
+                timeout: PREBID_TIMEOUT
+            });
+
+            function initAdserver() {
+                if (pbjs.initAdserverSet) return;
+                pbjs.initAdserverSet = true;
+                googletag.cmd.push(function () {
+                    pbjs.que.push(function () {
+                        pbjs.setTargetingForGPTAsync();
+                        googletag.pubads().setTargeting("refresh_N", "1");
+                        googletag.pubads().refresh();
+                    });
+                });
+            }
+            setTimeout(function () {
+                initAdserver();
+            }, FAILSAFE_TIMEOUT);
 
             googletag.cmd.push(function () {
-                googletag.defineSlot('/21974715207/web-destiny-2-display-m', [[300, 250], [336, 280]], 'div_display_m').addService(googletag.pubads());
+                googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.enableServices();
+            });
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/21974715207/web-destiny-2-display-l', div_display_l_sizes, 'div_display_l').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+
+            googletag.cmd.push(function () {
                 googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_m');
             });
 
             googletag.cmd.push(function () {
-                googletag.defineSlot('/21974715207/web-destiny-2-display-l', [[300, 250], [336, 280]], 'div_display_l').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.enableServices();
                 googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_l');
             });
