@@ -504,7 +504,7 @@
 
         async function secondBlock() {
             console.log("Ждём перед вторым блоком...");
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
             console.log("Выполняем второй блок...");
 
@@ -635,7 +635,7 @@
                                     refreshInSeconds: 7200
                                 }
                             }],
-                        auctionDelay: 250
+                        auctionDelay: 3000
                     }
                 });
                 console.log("pbjs.setConfig выполнен.");
@@ -646,7 +646,7 @@
 
         async function thirdBlock() {
             console.log("Ждём перед третьим блоком...");
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
             console.log("Выполняем третий блок...");
             pbjs.registerSignalSources();
