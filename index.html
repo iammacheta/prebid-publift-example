@@ -6,7 +6,6 @@
     <script defer src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script defer
         src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@6e53193d5e03248ce36534294166c50ce159d816/prebid.js"></script>
-    <!-- <script async src="https://storage.cloud.google.com/cdn.mobalytics.gg/assets/common/prebid/prebid.js"></script> -->
 
     <script>
         var div_display_m_sizes = [
@@ -482,12 +481,8 @@
             ]
         };
 
-
-
         async function firstBlock() {
             console.log("Выполняем первый блок...");
-
-            // ======== DO NOT EDIT BELOW THIS LINE =========== //
 
             var googletag = googletag || {};
             googletag.cmd = googletag.cmd || [];
@@ -502,30 +497,25 @@
             console.log("Первый блок завершён.");
         }
 
+        function waitForPrebid() {
+            return new Promise(resolve => {
+                let checkInterval = setInterval(() => {
+                    if (window.pbjs && window.pbjs.setConfig) {
+                        clearInterval(checkInterval);
+                        resolve();
+                    }
+                }, 100);
+            });
+        }
+
         async function secondBlock() {
             console.log("Ждём перед вторым блоком...");
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await waitForPrebid();
 
             console.log("Выполняем второй блок...");
 
-
-            var pbjs = pbjs || {};
-            pbjs.que = pbjs.que || [];
-
             pbjs.que.push(function () {
-                pbjs.onEvent('auctionDebug', function (eventData) {
-                    if (
-                        eventData &&
-                        eventData.type === 'ERROR' &&
-                        eventData.arguments &&
-                        eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
-                    ) {
-                        console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
-                    }
-                });
-            });
 
-            pbjs.que.push(function () {
                 pbjs.bidderSettings = {
                     standard: {
                         storageAllowed: true
@@ -667,6 +657,7 @@
                     });
                 });
             }
+
             setTimeout(function () {
                 initAdserver();
             }, FAILSAFE_TIMEOUT);
