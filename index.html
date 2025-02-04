@@ -20,26 +20,6 @@
             [250, 250],
             [200, 200],
         ];
-        var div_display_l_sizes = [
-            [300, 250],
-            [336, 280],
-            [320, 50],
-            [320, 100],
-            [300, 50],
-            [300, 100],
-            [250, 360],
-            [250, 250],
-            [200, 200],
-        ];
-        var div_display_footer_d_sizes = [
-            [728, 90],
-        ];
-        var div_display_footer_m_sizes = [
-            [320, 50],
-            [320, 100],
-            [300, 50],
-            [300, 100],
-        ];
 
         var PREBID_TIMEOUT = 2000;
         var FAILSAFE_TIMEOUT = 3000;
@@ -67,67 +47,6 @@
                             allowSmallerSizes: true,
                             position: 'above'
                         }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256209'
-                        }
-                    },
-                    {
-                        bidder: 'openx',
-                        params: {
-                            unit: '561445368',
-                            delDomain: 'mobalytics-d.openx.net',
-                        }
-                    },
-                    {
-                        bidder: "onetag",
-                        params: {
-                            pubId: "80ac484cd63fd7e",
-                            ext: { placement_name: "web-destiny-2-display-m" },
-                        }
-                    },
-                    {
-                        bidder: 'smartadserver',
-                        params: {
-                            siteId: 682899,
-                            pageId: 2035035,
-                            formatId: 135866,
-                        },
-                    },
-                    {
-                        bidder: 'gumgum',
-                        params: {
-                            zone: 'bdppvphq',
-                            slot: '1155240'
-                        }
-                    },
-                    {
-                        bidder: 'inmobi',
-                        params: {
-                            plc: '10000167297',
-                        }
-                    },
-                    {
-                        bidder: "ogury",
-                        params: {
-                            adUnitId: 'wd-hb-stdb-mobaly-mobal-6xnjqbcd90zb',
-                            assetKey: 'OGY-1D9A57637CDD'
-                        }
                     }
                 ],
                 ortb2Imp: {
@@ -138,325 +57,9 @@
                         }
                     }
                 }
-            },
-            {
-                code: '/21974715207/web-destiny-2-display-l',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_l_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: 'pubmatic',
-                        params: {
-                            publisherId: '165261',
-                            adSlot: '6141441'
-                        }
-                    },
-                    {
-                        bidder: 'appnexus',
-                        params: {
-                            placementId: 34122285,
-                            allowSmallerSizes: true,
-                        }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256210'
-                        }
-                    },
-                    {
-                        bidder: 'openx',
-                        params: {
-                            unit: '561445369',
-                            delDomain: 'mobalytics-d.openx.net',
-                        }
-                    },
-                    {
-                        bidder: "onetag",
-                        params: {
-                            pubId: "80ac484cd63fd7e",
-                            ext: { placement_name: "web-destiny-2-display-l" },
-                        }
-                    },
-                    {
-                        bidder: 'smartadserver',
-                        params: {
-                            siteId: 682899,
-                            pageId: 2035036,
-                            formatId: 135867,
-                        },
-                    },
-                    {
-                        bidder: 'gumgum',
-                        params: {
-                            zone: 'bdppvphq',
-                            slot: '1273326'
-                        }
-                    },
-                    {
-                        bidder: 'inmobi',
-                        params: {
-                            plc: '10000167298',
-                        }
-                    }
-                ],
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-l",
-                            placement: "sidebar-2",
-                        }
-                    }
-                }
-            },
-            {
-                code: '/21974715207/web-destiny-2-display-3',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_m_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'gumgum',
-                        params: {
-                            zone: 'bdppvphq',
-                            slot: '1273323'
-                        }
-                    },
-                    {
-                        bidder: 'inmobi',
-                        params: {
-                            plc: '10000167299',
-                        }
-                    }
-                ],
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-3",
-                            placement: "sidebar-3",
-                        }
-                    }
-                }
-            },
-            {
-                code: '/21974715207/web-destiny-2-display-footer-d',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_footer_d_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: 'pubmatic',
-                        params: {
-                            publisherId: '165261',
-                            adSlot: '6141442'
-                        }
-                    },
-                    {
-                        bidder: 'appnexus',
-                        params: {
-                            placementId: 34122289,
-                            position: 'above'
-                        }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256211'
-                        }
-                    },
-                    {
-                        bidder: 'openx',
-                        params: {
-                            unit: '561445370',
-                            delDomain: 'mobalytics-d.openx.net',
-                        }
-                    },
-                    {
-                        bidder: "onetag",
-                        params: {
-                            pubId: "80ac484cd63fd7e",
-                            ext: { placement_name: "web-destiny-2-display-footer-d" },
-                        }
-                    },
-                    {
-                        bidder: 'smartadserver',
-                        params: {
-                            siteId: 682899,
-                            pageId: 2035037,
-                            formatId: 135868,
-                        },
-                    },
-                    {
-                        bidder: 'gumgum',
-                        params: {
-                            zone: 'bdppvphq',
-                            slot: '1273327'
-                        }
-                    },
-                    {
-                        bidder: 'inmobi',
-                        params: {
-                            plc: '10000167300',
-                        }
-                    },
-                    {
-                        bidder: "ogury",
-                        params: {
-                            adUnitId: 'wd-hb-stdb-mobaly-mobal-by5lcxwkbpyj',
-                            assetKey: 'OGY-1D9A57637CDD'
-                        }
-                    }
+            }
 
-                ],
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-footer-d",
-                            placement: "footer-w",
-                        }
-                    }
-                }
-            },
-            {
-                code: '/21974715207/web-destiny-2-display-footer-m',
-                mediaTypes: {
-                    banner: {
-                        sizes: div_display_footer_m_sizes
-                    }
-                },
-                bids: [
-                    {
-                        bidder: 'pubmatic',
-                        params: {
-                            publisherId: '165261',
-                            adSlot: '6141443'
-                        }
-                    },
-                    {
-                        bidder: 'appnexus',
-                        params: {
-                            placementId: 34122291,
-                            allowSmallerSizes: true,
-                            position: 'above'
-                        }
-                    },
-                    {
-                        bidder: "adagio",
-                        params: {
-                            organizationId: "1458",
-                            site: "mobalytics-gg",
-                        }
-                    },
-                    {
-                        bidder: 'oms',
-                        params: {
-                            publisherId: '21048',
-                        }
-                    },
-                    {
-                        bidder: 'sovrn',
-                        params: {
-                            tagid: '1256212'
-                        }
-                    },
-                    {
-                        bidder: 'openx',
-                        params: {
-                            unit: '561445371',
-                            delDomain: 'mobalytics-d.openx.net',
-                        }
-                    },
-                    {
-                        bidder: "onetag",
-                        params: {
-                            pubId: "80ac484cd63fd7e",
-                            ext: { placement_name: "web-destiny-2-display-footer-m" },
-                        }
-                    },
-                    {
-                        bidder: 'smartadserver',
-                        params: {
-                            siteId: 682899,
-                            pageId: 2035038,
-                            formatId: 135869,
-                        },
-                    },
-                    {
-                        bidder: 'gumgum',
-                        params: {
-                            zone: 'bdppvphq',
-                            slot: '1273329'
-                        }
-                    },
-                    {
-                        bidder: 'inmobi',
-                        params: {
-                            plc: '10000167301',
-                        }
-                    },
-                    {
-                        bidder: "ogury",
-                        params: {
-                            adUnitId: 'wm-hb-foot-mobaly-mobal-p0t0g8k3cci1',
-                            assetKey: 'OGY-1D9A57637CDD'
-                        }
-                    }
-                ],
-                ortb2Imp: {
-                    ext: {
-                        data: {
-                            divId: "web-destiny-2-display-footer-m",
-                            placement: "footer-s",
-                        }
-                    }
-                }
-            },
+
         ];
 
         const customConfigObject = {
@@ -484,197 +87,194 @@
             ]
         };
 
-        /********* Initialize command queues **********/
-        window.pbjs = window.pbjs || { que: [] };
-        window.googletag = window.googletag || { cmd: [] };
-
-        /********* Create a Promise for Prebid configuration **********/
-        const prebidConfigured = new Promise(resolve => {
-            window.pbjs.que.push(function () {
-                // --- Prebid configuration code ---
-                pbjs.bidderSettings = {
-                    standard: {
-                        storageAllowed: true
-                    }
-                };
-
-                pbjs.setConfig({
-                    useBidCache: true,
-                    minBidCacheTTL: 10,
-                    eventHistoryTTL: 10,
-                    enableSendAllBids: false,
-                    enableTIDs: true,
-                    priceGranularity: customConfigObject,
-                    consentManagement: {
-                        gdpr: {
-                            cmpApi: "iab",
-                            timeout: 500,
-                            actionTimeout: 10000,
-                            defaultGdprScope: true,
-                            allowAuctionWithoutConsent: true,
-                            rules: [
-                                {
-                                    purpose: "storage",
-                                    enforcePurpose: true,
-                                    enforceVendor: true,
-                                    vendorExceptions: ["uid2"]
-                                },
-                                {
-                                    purpose: "basicAds",
-                                    enforcePurpose: true,
-                                    enforceVendor: true,
-                                    vendorExceptions: ["uid2"]
-                                },
-                                {
-                                    purpose: "personalizedAds",
-                                    enforcePurpose: true,
-                                    enforceVendor: true,
-                                    vendorExceptions: ["uid2"]
-                                },
-                                {
-                                    purpose: "measurement",
-                                    enforcePurpose: true,
-                                    enforceVendor: true
-                                },
-                                {
-                                    purpose: "transmitPreciseGeo",
-                                    enforcePurpose: true
-                                }
-                            ]
-                        },
-                        usp: {
-                            cmpApi: "iab",
-                            timeout: 500
-                        }
-                    },
-                    gptPreAuction: {
-                        enabled: true,
-                    },
-                    currency: {
-                        adServerCurrency: 'USD',
-                        granularityMultiplier: 1,
-                        defaultRates: {
-                            'EUR': 1.10,
-                            'GBP': 1.30
-                        },
-                        conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json'
-                    },
-                    deviceAccess: true,
-                    userSync: {
-                        filterSettings: {
-                            iframe: {
-                                bidders: '*',
-                                filter: 'include'
-                            }
-                        },
-                        userIds: [
-                            {
-                                name: "sharedId",
-                                storage: {
-                                    type: "cookie",
-                                    name: "_sharedid",
-                                    expires: 365
-                                }
-                            },
-                            {
-                                name: "uid2",
-                                params: {
-                                    emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
-                                    serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
-                                    subscriptionId: "TG5mQTPCsw"
-                                }
-                            },
-                            { name: "criteo" },
-                            {
-                                name: 'id5Id',
-                                params: {
-                                    partner: 1779,
-                                    externalModuleUrl: 'https://cdn.id5-sync.com/api/1.0/id5PrebidModule.js',
-                                    pd: 'NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4='
-                                },
-                                storage: {
-                                    type: 'html5',
-                                    name: 'id5id',
-                                    expires: 90,
-                                    refreshInSeconds: 7200
-                                }
-                            }
-                        ],
-                        auctionDelay: 250
-                    }
-                });
-
-                // Add ad units and request bids
-                pbjs.addAdUnits(adUnits);
-                pbjs.requestBids({
-                    bidsBackHandler: initAdserver,
-                    timeout: PREBID_TIMEOUT
-                });
-                // Resolve the Promise once configuration is complete
-                console.log("setConfig - finished")
-                resolve();
-            });
-        });
-
-        /********* Create a Promise for GPT loading **********/
-        const gptLoaded = new Promise(resolve => {
-            window.googletag.cmd.push(function () {
-                // GPT is loaded—resolve the Promise.
-                console.log("googletag - finished")
-                resolve();
-            });
-        });
-
-        /********* Wait for both Prebid and GPT to be ready **********/
-        Promise.all([prebidConfigured, gptLoaded])
-            .then(() => {
-                // Now that both systems are ready, register signal sources
-                console.log("Both prebidConfigured, gptLoaded")
-                pbjs.registerSignalSources();
-                console.log("registerSignalSources triggered")
-            });
-
-        /********* GPT Setup for Ad Slots **********/
+        // ======== DO NOT EDIT BELOW THIS LINE =========== //
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
         googletag.cmd.push(function () {
-            // Disable the initial load, define ad slots, and enable services
             googletag.pubads().disableInitialLoad();
-
-            googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m')
-                .addService(googletag.pubads());
-            googletag.defineSlot('/21974715207/web-destiny-2-display-l', div_display_l_sizes, 'div_display_l')
-                .addService(googletag.pubads());
-            googletag.defineSlot('/21974715207/web-destiny-2-display-3', div_display_m_sizes, 'div_display_3')
-                .addService(googletag.pubads());
-            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-d', div_display_footer_d_sizes, 'div_display_footer_d')
-                .addService(googletag.pubads());
-            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-m', div_display_footer_m_sizes, 'div_display_footer_m')
-                .addService(googletag.pubads());
-
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
         });
 
-        /********* Ad Server Initialization **********/
+        googlefc.callbackQueue.push({
+            'CONSENT_API_READY': () => {
+                var pbjs = pbjs || {};
+                pbjs.que = pbjs.que || [];
+
+
+                pbjs.que.push(function () {
+                    pbjs.onEvent('auctionDebug', function (eventData) {
+                        if (
+                            eventData &&
+                            eventData.type === 'ERROR' &&
+                            eventData.arguments &&
+                            eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
+                        ) {
+                            console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
+                        }
+                    });
+                });
+
+                pbjs.que.push(function () {
+                    pbjs.bidderSettings = {
+                        standard: {
+                            storageAllowed: true
+                        }
+                    }
+
+                    pbjs.setConfig({
+                        useBidCache: true,
+                        minBidCacheTTL: 10,
+                        eventHistoryTTL: 10,
+                        enableSendAllBids: false,
+                        enableTIDs: true,
+                        priceGranularity: customConfigObject,
+                        consentManagement: {
+                            gdpr: {
+                                cmpApi: "iab",
+                                timeout: 500,
+                                actionTimeout: 10000,
+                                defaultGdprScope: true,
+                                allowAuctionWithoutConsent: true,
+                                rules: [
+                                    {
+                                        purpose: "storage",
+                                        enforcePurpose: true,
+                                        enforceVendor: true,
+                                        vendorExceptions: ["uid2"]
+                                    },
+                                    {
+                                        purpose: "basicAds",
+                                        enforcePurpose: true,
+                                        enforceVendor: true,
+                                        vendorExceptions: ["uid2"]
+                                    },
+                                    {
+                                        purpose: "personalizedAds",
+                                        enforcePurpose: true,
+                                        enforceVendor: true,
+                                        vendorExceptions: ["uid2"]
+                                    },
+                                    {
+                                        purpose: "measurement",
+                                        enforcePurpose: true,
+                                        enforceVendor: true
+                                    },
+                                    {
+                                        purpose: "transmitPreciseGeo",
+                                        enforcePurpose: true
+                                    }
+                                ]
+                            },
+                            usp: {
+                                cmpApi: "iab",
+                                timeout: 500
+                            }
+                        },
+                        gptPreAuction: {
+                            enabled: true,
+                        },
+                        currency: {
+                            adServerCurrency: 'USD',
+                            granularityMultiplier: 1,
+                            defaultRates: {
+                                'EUR': 1.10,
+                                'GBP': 1.30
+                            },
+                            conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
+                        },
+                        deviceAccess: true,
+                        userSync: {
+                            filterSettings: {
+                                iframe: {
+                                    bidders: '*',
+                                    filter: 'include'
+                                }
+                            },
+                            encryptedSignalSources: {
+                                "sources": [{
+                                    source: ['uidapi.com', 'pubcid.org', 'id5-sync.com'],
+                                    encrypt: false
+                                }],
+                                "registerDelay": 3000
+                            },
+                            userIds: [
+                                {
+                                    name: "sharedId",
+                                    storage: {
+                                        type: "cookie",
+                                        name: "_sharedid",
+                                        expires: 365
+                                    }
+                                },
+                                {
+                                    name: "uid2",
+                                    params: {
+                                        emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
+                                        serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
+                                        subscriptionId: "TG5mQTPCsw",
+                                    }
+                                },
+                                {
+                                    name: "criteo",
+                                },
+                                {
+                                    name: 'id5Id',
+                                    params: {
+                                        partner: 1779,
+                                        externalModuleUrl: 'https://cdn.id5-sync.com/api/1.0/id5PrebidModule.js',
+                                        pd: 'NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=',
+                                    },
+                                    storage: {
+                                        type: 'html5',
+                                        name: 'id5id',
+                                        expires: 90,
+                                        refreshInSeconds: 7200
+                                    }
+                                }],
+                            auctionDelay: 250
+                        }
+                    });
+                    pbjs.registerSignalSources();
+                    pbjs.addAdUnits(adUnits);
+                    pbjs.requestBids({
+                        bidsBackHandler: initAdserver,
+                        timeout: PREBID_TIMEOUT
+                    });
+                });
+            }
+        });
+
+
+
         function initAdserver() {
             if (pbjs.initAdserverSet) return;
             pbjs.initAdserverSet = true;
             googletag.cmd.push(function () {
-                pbjs.setTargetingForGPTAsync();
-                googletag.pubads().setTargeting("refresh_N", "1");
-                googletag.pubads().refresh();
+                pbjs.que.push(function () {
+                    pbjs.setTargetingForGPTAsync();
+                    googletag.pubads().setTargeting("refresh_N", "1");
+                    googletag.pubads().refresh();
+                });
             });
         }
-        // Failsafe in case bids take too long:
-        setTimeout(initAdserver, FAILSAFE_TIMEOUT);
+        setTimeout(function () {
+            initAdserver();
+        }, FAILSAFE_TIMEOUT);
+
+        // ====================================== //
+
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
     </script>
 </head>
 
 <body>
     <h2>Basic Prebid.js Example</h2>
-
     <h5>Div display_m</h5>
-    <div id="div_display_m" style="width: 336px; height: 280px;">
-        <script type="text/javascript">
+    <div id='div_display_m' style='width: 336px; height: 280px;'>
+        <script type='text/javascript'>
             googletag.cmd.push(function () {
                 googletag.pubads().collapseEmptyDivs();
                 googletag.display('div_display_m');
@@ -682,47 +282,6 @@
         </script>
     </div>
 
-    <br>
-
-    <h5>Div display_l</h5>
-    <div id="div_display_l" style="width: 336px; height: 280px;">
-        <script type="text/javascript">
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_l');
-            });
-        </script>
-    </div>
-
-    <h5>Div display_3</h5>
-    <div id="div_display_3" style="width: 336px; height: 280px;">
-        <script type="text/javascript">
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_3');
-            });
-        </script>
-    </div>
-
-    <h5>Div display_footer_d</h5>
-    <div id="div_display_footer_d" style="width: 728px; height: 90px;">
-        <script type="text/javascript">
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_footer_d');
-            });
-        </script>
-    </div>
-
-    <h5>Div display_footer_m</h5>
-    <div id="div_display_footer_m" style="width: 320px; height: 100px;">
-        <script type="text/javascript">
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_footer_m');
-            });
-        </script>
-    </div>
 </body>
 
 </html>
