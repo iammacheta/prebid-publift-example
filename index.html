@@ -94,156 +94,167 @@
             googletag.pubads().disableInitialLoad();
         });
 
-        googlefc.callbackQueue.push({
-            'CONSENT_API_READY': () => {
-                var pbjs = pbjs || {};
-                pbjs.que = pbjs.que || [];
+        // Function that waits until googlefc is available
+        function waitForGoogleFC(callback) {
+            if (typeof googlefc !== 'undefined' && googlefc.callbackQueue) {
+                callback();
+            } else {
+                setTimeout(function () {
+                    waitForGoogleFC(callback);
+                }, 100);
+            }
+        }
+
+        waitForGoogleFC(function () {
+            googlefc.callbackQueue.push({
+                'CONSENT_API_READY': function () {
+                    var pbjs = pbjs || {};
+                    pbjs.que = pbjs.que || [];
 
 
-                pbjs.que.push(function () {
-                    pbjs.onEvent('auctionDebug', function (eventData) {
-                        if (
-                            eventData &&
-                            eventData.type === 'ERROR' &&
-                            eventData.arguments &&
-                            eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
-                        ) {
-                            console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
-                        }
-                    });
-                });
-
-                pbjs.que.push(function () {
-                    pbjs.bidderSettings = {
-                        standard: {
-                            storageAllowed: true
-                        }
-                    }
-
-                    pbjs.setConfig({
-                        useBidCache: true,
-                        minBidCacheTTL: 10,
-                        eventHistoryTTL: 10,
-                        enableSendAllBids: false,
-                        enableTIDs: true,
-                        priceGranularity: customConfigObject,
-                        consentManagement: {
-                            gdpr: {
-                                cmpApi: "iab",
-                                timeout: 500,
-                                actionTimeout: 10000,
-                                defaultGdprScope: true,
-                                allowAuctionWithoutConsent: true,
-                                rules: [
-                                    {
-                                        purpose: "storage",
-                                        enforcePurpose: true,
-                                        enforceVendor: true,
-                                        vendorExceptions: ["uid2"]
-                                    },
-                                    {
-                                        purpose: "basicAds",
-                                        enforcePurpose: true,
-                                        enforceVendor: true,
-                                        vendorExceptions: ["uid2"]
-                                    },
-                                    {
-                                        purpose: "personalizedAds",
-                                        enforcePurpose: true,
-                                        enforceVendor: true,
-                                        vendorExceptions: ["uid2"]
-                                    },
-                                    {
-                                        purpose: "measurement",
-                                        enforcePurpose: true,
-                                        enforceVendor: true
-                                    },
-                                    {
-                                        purpose: "transmitPreciseGeo",
-                                        enforcePurpose: true
-                                    }
-                                ]
-                            },
-                            usp: {
-                                cmpApi: "iab",
-                                timeout: 500
+                    pbjs.que.push(function () {
+                        pbjs.onEvent('auctionDebug', function (eventData) {
+                            if (
+                                eventData &&
+                                eventData.type === 'ERROR' &&
+                                eventData.arguments &&
+                                eventData.arguments[0] === 'TCF2 CMP not found. Canceling auction as per consentManagement config.'
+                            ) {
+                                console.log("CMP NOT FOUND ERROR OCCURED. SENDING EVENT TO MIXPANEL ||||||||||||||||||||||||||||||||")
                             }
-                        },
-                        gptPreAuction: {
-                            enabled: true,
-                        },
-                        currency: {
-                            adServerCurrency: 'USD',
-                            granularityMultiplier: 1,
-                            defaultRates: {
-                                'EUR': 1.10,
-                                'GBP': 1.30
-                            },
-                            conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
-                        },
-                        deviceAccess: true,
-                        userSync: {
-                            filterSettings: {
-                                iframe: {
-                                    bidders: '*',
-                                    filter: 'include'
+                        });
+                    });
+
+                    pbjs.que.push(function () {
+                        pbjs.bidderSettings = {
+                            standard: {
+                                storageAllowed: true
+                            }
+                        }
+
+                        pbjs.setConfig({
+                            useBidCache: true,
+                            minBidCacheTTL: 10,
+                            eventHistoryTTL: 10,
+                            enableSendAllBids: false,
+                            enableTIDs: true,
+                            priceGranularity: customConfigObject,
+                            consentManagement: {
+                                gdpr: {
+                                    cmpApi: "iab",
+                                    timeout: 500,
+                                    actionTimeout: 10000,
+                                    defaultGdprScope: true,
+                                    allowAuctionWithoutConsent: true,
+                                    rules: [
+                                        {
+                                            purpose: "storage",
+                                            enforcePurpose: true,
+                                            enforceVendor: true,
+                                            vendorExceptions: ["uid2"]
+                                        },
+                                        {
+                                            purpose: "basicAds",
+                                            enforcePurpose: true,
+                                            enforceVendor: true,
+                                            vendorExceptions: ["uid2"]
+                                        },
+                                        {
+                                            purpose: "personalizedAds",
+                                            enforcePurpose: true,
+                                            enforceVendor: true,
+                                            vendorExceptions: ["uid2"]
+                                        },
+                                        {
+                                            purpose: "measurement",
+                                            enforcePurpose: true,
+                                            enforceVendor: true
+                                        },
+                                        {
+                                            purpose: "transmitPreciseGeo",
+                                            enforcePurpose: true
+                                        }
+                                    ]
+                                },
+                                usp: {
+                                    cmpApi: "iab",
+                                    timeout: 500
                                 }
                             },
-                            encryptedSignalSources: {
-                                "sources": [{
-                                    source: ['uidapi.com', 'pubcid.org', 'id5-sync.com'],
-                                    encrypt: false
-                                }],
-                                "registerDelay": 3000
+                            gptPreAuction: {
+                                enabled: true,
                             },
-                            userIds: [
-                                {
-                                    name: "sharedId",
-                                    storage: {
-                                        type: "cookie",
-                                        name: "_sharedid",
-                                        expires: 365
+                            currency: {
+                                adServerCurrency: 'USD',
+                                granularityMultiplier: 1,
+                                defaultRates: {
+                                    'EUR': 1.10,
+                                    'GBP': 1.30
+                                },
+                                conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
+                            },
+                            deviceAccess: true,
+                            userSync: {
+                                filterSettings: {
+                                    iframe: {
+                                        bidders: '*',
+                                        filter: 'include'
                                     }
                                 },
-                                {
-                                    name: "uid2",
-                                    params: {
-                                        emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
-                                        serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
-                                        subscriptionId: "TG5mQTPCsw",
-                                    }
+                                encryptedSignalSources: {
+                                    "sources": [{
+                                        source: ['uidapi.com', 'pubcid.org', 'id5-sync.com'],
+                                        encrypt: false
+                                    }],
+                                    "registerDelay": 3000
                                 },
-                                {
-                                    name: "criteo",
-                                },
-                                {
-                                    name: 'id5Id',
-                                    params: {
-                                        partner: 1779,
-                                        externalModuleUrl: 'https://cdn.id5-sync.com/api/1.0/id5PrebidModule.js',
-                                        pd: 'NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=',
+                                userIds: [
+                                    {
+                                        name: "sharedId",
+                                        storage: {
+                                            type: "cookie",
+                                            name: "_sharedid",
+                                            expires: 365
+                                        }
                                     },
-                                    storage: {
-                                        type: 'html5',
-                                        name: 'id5id',
-                                        expires: 90,
-                                        refreshInSeconds: 7200
-                                    }
-                                }],
-                            auctionDelay: 250
-                        }
+                                    {
+                                        name: "uid2",
+                                        params: {
+                                            emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
+                                            serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
+                                            subscriptionId: "TG5mQTPCsw",
+                                        }
+                                    },
+                                    {
+                                        name: "criteo",
+                                    },
+                                    {
+                                        name: 'id5Id',
+                                        params: {
+                                            partner: 1779,
+                                            externalModuleUrl: 'https://cdn.id5-sync.com/api/1.0/id5PrebidModule.js',
+                                            pd: 'NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=',
+                                        },
+                                        storage: {
+                                            type: 'html5',
+                                            name: 'id5id',
+                                            expires: 90,
+                                            refreshInSeconds: 7200
+                                        }
+                                    }],
+                                auctionDelay: 250
+                            }
+                        });
+                        pbjs.registerSignalSources();
+                        pbjs.addAdUnits(adUnits);
+                        pbjs.requestBids({
+                            bidsBackHandler: initAdserver,
+                            timeout: PREBID_TIMEOUT
+                        });
                     });
-                    pbjs.registerSignalSources();
-                    pbjs.addAdUnits(adUnits);
-                    pbjs.requestBids({
-                        bidsBackHandler: initAdserver,
-                        timeout: PREBID_TIMEOUT
-                    });
-                });
-            }
+                }
+            });
         });
-
-
 
         function initAdserver() {
             if (pbjs.initAdserverSet) return;
