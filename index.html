@@ -485,249 +485,192 @@
         };
 
         // ======== DO NOT EDIT BELOW THIS LINE =========== //
+
         var googletag = googletag || {};
         googletag.cmd = googletag.cmd || [];
-        googletag.cmd.push(function () {
-            googletag.pubads().disableInitialLoad();
-        });
 
         var pbjs = pbjs || {};
         pbjs.que = pbjs.que || [];
 
-        function block(ms) {
-            const start = Date.now();
-            while (Date.now() - start < ms) { } // Блокируем поток
+        async function firstBlock() {
+            console.log("Выполняем первый блок...");
+
+            googletag.cmd.push(function () {
+                googletag.pubads().disableInitialLoad();
+            });
+
+            console.log("Первый блок завершён.");
         }
 
-        console.log("Первый блок");
-        console.log("window.googlefc=", window.googlefc)
-        block(2000);
+        async function secondBlock() {
+            console.log("Ждём перед вторым блоком...");
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-        pbjs.que.push(function () {
-            pbjs.bidderSettings = {
-                standard: {
-                    storageAllowed: true
-                }
-            }
+            console.log("Выполняем второй блок...");
 
-            pbjs.setConfig({
-                useBidCache: true,
-                minBidCacheTTL: 10,
-                eventHistoryTTL: 10,
-                enableSendAllBids: false,
-                enableTIDs: true,
-                priceGranularity: customConfigObject,
-                consentManagement: {
-                    gdpr: {
-                        cmpApi: "iab",
-                        timeout: 500,
-                        actionTimeout: 10000,
-                        defaultGdprScope: true,
-                        allowAuctionWithoutConsent: true,
-                        rules: [
-                            {
-                                purpose: "storage",
-                                enforcePurpose: true,
-                                enforceVendor: true,
-                                vendorExceptions: ["uid2"]
-                            },
-                            {
-                                purpose: "basicAds",
-                                enforcePurpose: true,
-                                enforceVendor: true,
-                                vendorExceptions: ["uid2"]
-                            },
-                            {
-                                purpose: "personalizedAds",
-                                enforcePurpose: true,
-                                enforceVendor: true,
-                                vendorExceptions: ["uid2"]
-                            },
-                            {
-                                purpose: "measurement",
-                                enforcePurpose: true,
-                                enforceVendor: true
-                            },
-                            {
-                                purpose: "transmitPreciseGeo",
-                                enforcePurpose: true
-                            }
-                        ]
-                    },
-                    usp: {
-                        cmpApi: "iab",
-                        timeout: 500
-                    }
-                },
-                gptPreAuction: {
-                    enabled: true,
-                },
-                currency: {
-                    adServerCurrency: 'USD',
-                    granularityMultiplier: 1,
-                    defaultRates: {
-                        'EUR': 1.10,
-                        'GBP': 1.30
-                    },
-                    conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
-                },
-                deviceAccess: true,
-                userSync: {
-                    filterSettings: {
-                        iframe: {
-                            bidders: '*',
-                            filter: 'include'
+            pbjs.que.push(function () {
+                pbjs.setConfig({
+                    useBidCache: true,
+                    minBidCacheTTL: 10,
+                    eventHistoryTTL: 10,
+                    enableSendAllBids: false,
+                    enableTIDs: true,
+                    priceGranularity: customConfigObject,
+                    consentManagement: {
+                        gdpr: {
+                            cmpApi: "iab",
+                            timeout: 500,
+                            actionTimeout: 10000,
+                            defaultGdprScope: true,
+                            allowAuctionWithoutConsent: true,
+                            rules: [
+                                {
+                                    purpose: "storage",
+                                    enforcePurpose: true,
+                                    enforceVendor: true,
+                                    vendorExceptions: ["uid2"]
+                                },
+                                {
+                                    purpose: "basicAds",
+                                    enforcePurpose: true,
+                                    enforceVendor: true,
+                                    vendorExceptions: ["uid2"]
+                                },
+                                {
+                                    purpose: "personalizedAds",
+                                    enforcePurpose: true,
+                                    enforceVendor: true,
+                                    vendorExceptions: ["uid2"]
+                                },
+                                {
+                                    purpose: "measurement",
+                                    enforcePurpose: true,
+                                    enforceVendor: true
+                                },
+                                {
+                                    purpose: "transmitPreciseGeo",
+                                    enforcePurpose: true
+                                }
+                            ]
+                        },
+                        usp: {
+                            cmpApi: "iab",
+                            timeout: 500
                         }
                     },
-                    userIds: [
-                        {
-                            name: "sharedId",
-                            storage: {
-                                type: "cookie",
-                                name: "_sharedid",
-                                expires: 365
+                    gptPreAuction: {
+                        enabled: true,
+                    },
+                    currency: {
+                        adServerCurrency: 'USD',
+                        granularityMultiplier: 1,
+                        defaultRates: {
+                            'EUR': 1.10,
+                            'GBP': 1.30
+                        },
+                        conversionRateFile: 'https://cdn.jsdelivr.net/gh/prebid/currency-file@1/latest.json',
+                    },
+                    deviceAccess: true,
+                    userSync: {
+                        filterSettings: {
+                            iframe: {
+                                bidders: '*',
+                                filter: 'include'
                             }
                         },
-                        {
-                            name: "uid2",
-                            params: {
-                                emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
-                                serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
-                                subscriptionId: "TG5mQTPCsw",
-                            }
+                        encryptedSignalSources: {
+                            "sources": [{
+                                source: ['uidapi.com', 'pubcid.org', 'id5-sync.com'],
+                                encrypt: false
+                            }],
+                            "registerDelay": 3000
                         },
-                        {
-                            name: "criteo",
-                        },
-                        {
-                            name: 'id5Id',
-                            params: {
-                                partner: 1779,
-                                externalModuleUrl: 'https://cdn.id5-sync.com/api/1.0/id5PrebidModule.js',
-                                pd: 'NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=',
+                        userIds: [
+                            {
+                                name: "sharedId",
+                                storage: {
+                                    type: "cookie",
+                                    name: "_sharedid",
+                                    expires: 365
+                                }
                             },
-                            storage: {
-                                type: 'html5',
-                                name: 'id5id',
-                                expires: 90,
-                                refreshInSeconds: 7200
-                            }
-                        }],
-                    auctionDelay: 250
-                }
-            });
-
-            console.log("Второй блок");
-            console.log("window.googlefc=", window.googlefc)
-            console.log("config=", pbjs.getConfig())
-            block(3000);
-
-            pbjs.registerSignalSources();
-            pbjs.addAdUnits(adUnits);
-            pbjs.requestBids({
-                bidsBackHandler: initAdserver,
-                timeout: PREBID_TIMEOUT
-            });
-        });
-
-        function initAdserver() {
-            if (pbjs.initAdserverSet) return;
-            pbjs.initAdserverSet = true;
-            googletag.cmd.push(function () {
-                pbjs.que.push(function () {
-                    pbjs.setTargetingForGPTAsync();
-                    googletag.pubads().setTargeting("refresh_N", "1");
-                    googletag.pubads().refresh();
+                            {
+                                name: "uid2",
+                                params: {
+                                    emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
+                                    serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
+                                    subscriptionId: "TG5mQTPCsw",
+                                }
+                            },
+                            {
+                                name: "criteo",
+                            },
+                            {
+                                name: 'id5Id',
+                                params: {
+                                    partner: 1779,
+                                    externalModuleUrl: 'https://cdn.id5-sync.com/api/1.0/id5PrebidModule.js',
+                                    pd: 'NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=',
+                                },
+                                storage: {
+                                    type: 'html5',
+                                    name: 'id5id',
+                                    expires: 90,
+                                    refreshInSeconds: 7200
+                                }
+                            }],
+                        auctionDelay: 250
+                    }
                 });
+                console.log("pbjs.setConfig выполнен.");
             });
+
+            console.log("Второй блок завершён.");
         }
-        setTimeout(function () {
-            initAdserver();
-        }, FAILSAFE_TIMEOUT);
 
-        // ====================================== //
+        async function thirdBlock() {
+            console.log("Ждём перед третьим блоком...");
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-m', div_display_m_sizes, 'div_display_m').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-l', div_display_l_sizes, 'div_display_l').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-3', div_display_m_sizes, 'div_display_3').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-d', div_display_footer_d_sizes, 'div_display_footer_d').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/21974715207/web-destiny-2-display-footer-m', div_display_footer_m_sizes, 'div_display_footer_m').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
+            console.log("Выполняем третий блок...");
+
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/21974715207/web-destiny-2-display-m', [[300, 250], [336, 280]], 'div_display_m').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display('div_display_m');
+            });
+
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/21974715207/web-destiny-2-display-l', [[300, 250], [336, 280]], 'div_display_l').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+                googletag.pubads().collapseEmptyDivs();
+                googletag.display('div_display_l');
+            });
+
+            console.log("Третий блок завершён.");
+        }
+
+        async function runSequence() {
+            await firstBlock();
+            await secondBlock();
+            await thirdBlock();
+        }
+
+        document.addEventListener("DOMContentLoaded", runSequence);
     </script>
 </head>
 
 <body>
     <h2>Basic Prebid.js Example</h2>
-    <h5>Div display_m</h5>
-    <div id='div_display_m' style='width: 336px; height: 280px;'>
-        <script type='text/javascript'>
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_m');
-            });
-        </script>
-    </div>
 
-    <br>
+    <h5>Div display_m</h5>
+    <div id="div_display_m" style="width: 336px; height: 280px;"></div>
 
     <h5>Div display_l</h5>
-    <div id='div_display_l' style='width: 336px; height: 280px;'>
-        <script type='text/javascript'>
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_l');
-            });
-        </script>
-    </div>
-
-    <h5>Div display_3</h5>
-    <div id='div_display_3' style='width: 336px; height: 280px;'>
-        <script type='text/javascript'>
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_3');
-            });
-        </script>
-    </div>
-
-    <h5>Div display_footer_d</h5>
-    <div id='div_display_footer_d' style='width: 728px; height: 90px;'>
-        <script type='text/javascript'>
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_footer_d');
-            });
-        </script>
-    </div>
-
-    <h5>Div display_footer_m</h5>
-    <div id='div_display_footer_m' style='width: 320px; height: 100px;'>
-        <script type='text/javascript'>
-            googletag.cmd.push(function () {
-                googletag.pubads().collapseEmptyDivs();
-                googletag.display('div_display_footer_m');
-            });
-        </script>
-    </div>
+    <div id="div_display_l" style="width: 336px; height: 280px;"></div>
 </body>
 
 </html>
