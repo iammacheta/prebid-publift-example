@@ -584,25 +584,41 @@
                         }],
                         "registerDelay": 3000
                     },
-                    userIds: [{
-                        name: "sharedId",
-                        storage: {
-                            type: "cookie",
-                            name: "_sharedid",
-                            expires: 365
-                        }
-                    },
-                    {
-                        name: "uid2",
-                        params: {
-                            emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
-                            serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
-                            subscriptionId: "TG5mQTPCsw",
-                        }
-                    },
-                    {
-                        name: "criteo",
-                    }]
+                    userIds: [
+                        {
+                            name: "sharedId",
+                            storage: {
+                                type: "cookie",
+                                name: "_sharedid",
+                                expires: 365
+                            }
+                        },
+                        {
+                            name: "uid2",
+                            params: {
+                                emailHash: "NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=",
+                                serverPublicKey: "UID2-X-P-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoECNf4b0xQ5+LKMVe9iLELdbxlwCoZ3T3sZ3ZpvSWznJ58bzMz8XQhOiaMXBrqEig6rK/ut7irZI7esUWvVZIA==",
+                                subscriptionId: "TG5mQTPCsw",
+                            }
+                        },
+                        {
+                            name: "criteo",
+                        },
+                        {
+                            name: 'id5Id',
+                            params: {
+                                partner: 1779,
+                                externalModuleUrl: 'https://cdn.id5-sync.com/api/1.0/id5PrebidModule.js',
+                                pd: 'NU/pdbyygiVmxYIr/X9+7jwqS4tAQslQeMTRK8A7AL4=',
+                            },
+                            storage: {
+                                type: 'html5',
+                                name: 'id5id',
+                                expires: 90,
+                                refreshInSeconds: 7200
+                            }
+                        }],
+                    auctionDelay: 250
                 }
             });
             pbjs.registerSignalSources();
