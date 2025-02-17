@@ -5,7 +5,7 @@
 
     <script defer src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script defer
-        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@6e53193d5e03248ce36534294166c50ce159d816/prebid.js"></script>
+        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@4cc5d7e03518acd15bad2b3d224e070714ddfd80/prebid.js"></script>
 
     <script>
         var div_display_m_sizes = [
@@ -633,6 +633,16 @@
                             "registerDelay": 3000
                         },
                         auctionDelay: 3000
+                    },
+                    realTimeData: {
+                        dataProviders: [{
+                            name: 'adagio',
+                            params: {
+                                organizationId: '1458',
+                                site: "mobalytics-gg",
+                                placementSource: 'ortb',
+                            }
+                        }]
                     }
                 });
                 console.log("pbjs.setConfig выполнен.");
