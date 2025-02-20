@@ -5,7 +5,7 @@
 
     <script defer src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script defer
-        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@4cc5d7e03518acd15bad2b3d224e070714ddfd80/prebid.js"></script>
+        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@1ac5ce7da73007a4033e6ab5781cbe0a38121f81/prebid.js"></script>
 
     <script>
         var div_display_m_sizes = [
@@ -47,6 +47,15 @@
                 mediaTypes: {
                     banner: {
                         sizes: div_display_m_sizes
+                    }
+                },
+                floors: {
+                    currency: 'USD',
+                    schema: {
+                        fields: ['mediaType']
+                    },
+                    values: {
+                        'banner': 0.04,
                     }
                 },
                 bids: [
@@ -143,6 +152,15 @@
                         sizes: div_display_l_sizes
                     }
                 },
+                floors: {
+                    currency: 'USD',
+                    schema: {
+                        fields: ['mediaType']
+                    },
+                    values: {
+                        'banner': 0.04,
+                    }
+                },
                 bids: [
                     {
                         bidder: 'pubmatic',
@@ -229,6 +247,15 @@
                         sizes: div_display_m_sizes
                     }
                 },
+                floors: {
+                    currency: 'USD',
+                    schema: {
+                        fields: ['mediaType']
+                    },
+                    values: {
+                        'banner': 0.04,
+                    }
+                },
                 bids: [
                     {
                         bidder: "adagio",
@@ -271,6 +298,15 @@
                 mediaTypes: {
                     banner: {
                         sizes: div_display_footer_d_sizes
+                    }
+                },
+                floors: {
+                    currency: 'USD',
+                    schema: {
+                        fields: ['mediaType']
+                    },
+                    values: {
+                        'banner': 0.08,
                     }
                 },
                 bids: [
@@ -365,6 +401,15 @@
                 mediaTypes: {
                     banner: {
                         sizes: div_display_footer_m_sizes
+                    }
+                },
+                floors: {
+                    currency: 'USD',
+                    schema: {
+                        fields: ['mediaType']
+                    },
+                    values: {
+                        'banner': 0.08,
                     }
                 },
                 bids: [
