@@ -568,6 +568,13 @@
                 }
 
                 pbjs.setConfig({
+                    floors: {
+                        enforcement: {
+                            enforcePBS: false,
+                            enforceJS: true,
+                        },
+                        default: 0.05
+                    },
                     useBidCache: true,
                     minBidCacheTTL: 10,
                     eventHistoryTTL: 10,
