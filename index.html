@@ -579,6 +579,7 @@
                     minBidCacheTTL: 10,
                     eventHistoryTTL: 10,
                     enableSendAllBids: false,
+                    timeoutBuffer: 400,
                     enableTIDs: true,
                     priceGranularity: customConfigObject,
                     consentManagement: {
@@ -684,7 +685,7 @@
                             }],
                             "registerDelay": 3000
                         },
-                        auctionDelay: 3000
+                        auctionDelay: 1000
                     },
                     realTimeData: {
                         dataProviders: [{
