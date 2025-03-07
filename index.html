@@ -5,7 +5,7 @@
 
     <script defer src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script defer
-        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@1ac5ce7da73007a4033e6ab5781cbe0a38121f81/prebid.js"></script>
+        src="https://cdn.jsdelivr.net/gh/iammacheta/prebid-code@2ac7ef9da0983ef75721f2c475038bf570e7a0ff/prebid.js"></script>
 
     <script>
         var div_display_m_sizes = [
@@ -632,10 +632,16 @@
                                     expires: 90,
                                     refreshInSeconds: 7200
                                 }
+                            },
+                            {
+                                name: "lotamePanoramaId",
+                                params: {
+                                    clientId: "17999"
+                                }
                             }],
                         encryptedSignalSources: {
                             "sources": [{
-                                source: ['uidapi.com', 'pubcid.org', 'id5-sync.com'],
+                                source: ['uidapi.com', 'pubcid.org', 'id5-sync.com', 'crwdcntrl.net'],
                                 encrypt: false
                             }],
                             "registerDelay": 3000
